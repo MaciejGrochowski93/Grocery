@@ -13,8 +13,8 @@
         <h1>Registration</h1>
         <hr>
         <h2>Sign in</h2>
-        <form action="#" th:action="@{/addUser}" th:object="${user}" method="POST">
-            <input type="text" th:field = "*{email}" placeholder="Your login:" class="form-control mb-4 col-4" required>
+        <form th:action="@{/register}" th:object="${user}" method="POST">
+            <input type="text" th:field = "*{email}" placeholder="Your email:" class="form-control mb-4 col-4" required>
             <input type="text" th:field = "*{firstName}" placeholder="Your name:" class="form-control mb-4 col-4" required>
             <input type="password" th:field = "*{password}" placeholder="Your password:" class="form-control mb-4 col-4" required>
             <button type="submit" class="btn btn-info col-2">Sign in</button>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Maciej's Grocery</title>
@@ -11,19 +11,19 @@
     <div align="center">
         <h1>Maciej's Grocery</h1>
 
-        <h2>Welcome, user!</h2>
-        <a th:href="@{/addNewProduct}" class = "btn btn-primary btn-sm mb-3">Add Product</a>
-        <table border="2" class="table table-bordered" style="width: 75%">
+        <h2>Welcome, <span sec:authentication="principal.username"></span></h2>
+        <a th:href="@{/addProduct}" class = "btn btn-primary btn-sm mb-3">Add Product</a>
+        <table border="2" class="table table-bordered" style="width: 60%">
             <thead>
-            <tr>
-                <th>Name</th>
-                <th>Brand</th>
-                <th>Price</th>
-                <th>Category</th>
-                <th>Country</th>
-                <th>Expiration</th>
-                <th>Action</th>
-            </tr>
+                <tr>
+                    <th>Name</th>
+                    <th>Brand</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th>Country</th>
+                    <th>Expiration</th>
+                    <th>Action</th>
+                </tr>
             </thead>
             <tbody>
             <tr th:each="products : ${productList}">
@@ -34,8 +34,8 @@
                 <td th:text="${products.countryProd}">Country</td>
                 <td th:text="${products.dateExpiration}">Expiration</td>
 
-                <td><a th:href="@{/updateProductForm/{id}(id=${products.id)}}" class="btn btn-primary">Update</a> </td>
-                <td><a th:href="@{/deleteProductForm/{id}(id=${products.id)}}" class="btn btn-primary">Delete</a> </td>
+<!--                <td><a th:href="@{/updateProductForm/{id}(id=${products.id)}}" class="btn btn-primary">Update</a> </td>-->
+<!--                <td><a th:href="@{/deleteProductForm/{id}(id=${products.id)}}" class="btn btn-primary">Delete</a> </td>-->
             </tr>
             </tbody>
         </table>

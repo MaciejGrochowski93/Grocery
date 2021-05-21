@@ -35,10 +35,10 @@ public class User {
         this.firstName = firstName;
     }
 
+    // TODO customize validation errors
+
     public void buyProduct(Product product) {
         this.setMoney(this.getMoney() - product.getPrice());
     }
-
-    // TODO customize validation errors
 
 }

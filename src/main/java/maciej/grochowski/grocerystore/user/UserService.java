@@ -1,6 +1,7 @@
 package maciej.grochowski.grocerystore.user;
 
 import lombok.AllArgsConstructor;
+import maciej.grochowski.grocerystore.product.Product;
 import maciej.grochowski.grocerystore.registration.token.ConfirmationToken;
 import maciej.grochowski.grocerystore.registration.token.ConfirmationTokenService;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -53,5 +54,10 @@ public class UserService implements UserDetailsService {
 
     public int enableUser(String email) {
         return userRepository.enableUser(email);
+    }
+
+    public void buyProduct(String email, Product product) {
+        Optional<User> user = userRepository.findUserByEmail(email);
+        user.ifPresent(e -> e.setMoney(e.getMoney() - product.getPrice()));
     }
 }

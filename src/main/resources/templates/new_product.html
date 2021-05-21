@@ -13,13 +13,13 @@
         <h1>Product</h1>
         <hr>
         <h2>Add product</h2>
-        <form action="#" th:action="@{addProduct}" th:object="${product}" method="POST">
-            <input type="text" th:field="*{name}" placeholder="Product's name" class="form-control mb-4 col-4"/>
+        <form th:action="@{/addProduct}" th:object="${product}" method="POST">
+            <input type="text" th:field="*{name}" placeholder="Product's name" class="form-control mb-4 col-4" required/>
             <input type="text" th:field="*{brand}" placeholder="Product's brand" class="form-control mb-4 col-4"/>
-            <input type="text" th:field="*{price}" placeholder="Product's price" class="form-control mb-4 col-4"/>
-            <input type="text" th:field="*{category}" placeholder="Product's category" class="form-control mb-4 col-4"/>
-            <input type="text" th:field="*{country}" placeholder="Product's country" class="form-control mb-4 col-4"/>
-            <input type="text" th:field="*{expiration}" placeholder="Product's expiration" class="form-control mb-4 col-4"/>
+            <input type="text" th:field="*{price}" placeholder="Product's price" class="form-control mb-4 col-4" required/>
+            <input type="text" th:field="*{category}" placeholder="Product's category" class="form-control mb-4 col-4" required/>
+            <input type="text" th:field="*{countryProd}" placeholder="Product's country" class="form-control mb-4 col-4" required/>
+            <input type="text" th:field="*{dateExpiration}" placeholder="Product's expiration" class="form-control mb-4 col-4"/>
             <button type="submit" class="btn btn-info col-1">Add Product</button>
         </form>
     </div>
