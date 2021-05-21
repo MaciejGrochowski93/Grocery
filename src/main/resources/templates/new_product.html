@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+          crossorigin="anonymous">
+</head>
+<body>
+    <div w3-include-html="navLogged.html"></div>
+    <div class="container">
+        <h1>Product</h1>
+        <hr>
+        <h2>Add product</h2>
+        <form action="#" th:action="@{addProduct}" th:object="${product}" method="POST">
+            <input type="text" th:field="*{name}" placeholder="Product's name" class="form-control mb-4 col-4"/>
+            <input type="text" th:field="*{brand}" placeholder="Product's brand" class="form-control mb-4 col-4"/>
+            <input type="text" th:field="*{price}" placeholder="Product's price" class="form-control mb-4 col-4"/>
+            <input type="text" th:field="*{category}" placeholder="Product's category" class="form-control mb-4 col-4"/>
+            <input type="text" th:field="*{country}" placeholder="Product's country" class="form-control mb-4 col-4"/>
+            <input type="text" th:field="*{expiration}" placeholder="Product's expiration" class="form-control mb-4 col-4"/>
+            <button type="submit" class="btn btn-info col-1">Add Product</button>
+        </form>
+    </div>
+    <script src="js/script.js"></script>
+    <script>includeHTML();</script>
+</body>
+</html>
