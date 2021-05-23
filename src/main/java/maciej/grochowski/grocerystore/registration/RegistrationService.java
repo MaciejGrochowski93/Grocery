@@ -31,27 +31,38 @@ public class RegistrationService {
                 new User(request.getEmail(), request.getPassword(), request.getFirstName())
         );
 
-        String message = "Hello, " + request.getFirstName() +
-                ". Please, confirm your email if you want to register at Maciej's Grocery.";
-        emailSender.sendMail(request.getEmail(), message);
+        String link = "http://localhost:8080/registration/confirm?token=" + token;
+
+        emailSender.sendMail(request.getEmail(), buildEmail(request.getFirstName(), link));
         return token;
     }
 
     @Transactional
     public String confirmToken(String token) {
-        ConfirmationToken confirmationToken =
-                confirmationTokenService.getToken(token).orElseThrow(() -> new IllegalStateException("Token was not found."));
+        ConfirmationToken confirmationToken =confirmationTokenService
+                        .getToken(token)
+                        .orElseThrow(() -> new IllegalStateException("Token was not found."));
 
         if (confirmationToken.getConfirmationTime() != null) {
             throw new IllegalStateException("Email is already confirmed.");
         }
 
-        else if (confirmationToken.getConfirmationTime().isBefore(LocalDateTime.now())) {
+        if (confirmationToken.getExpirationTime().isBefore(LocalDateTime.now())) {
             throw new IllegalStateException("Confirmation Token has expired.");
         }
 
         confirmationTokenService.confirmToken(token);
         userService.enableUser(confirmationToken.getUser().getEmail());
         return "Token confirmed.";
+    }
+
+    private String buildEmail(String name, String link) {
+        return "Hello, " + name + ". "
+                + "<p>Thank you for registering at Maciej's Grocery.</p>"
+                + "<p>Please, confirm your registration, and activate your profile by clicking on the link: </p>"
+                + "<p><a href=" + link + "> Confirmation</a></p>"
+                + "<p>If you didn't register at Maciej's Grocery, please ignore this email.</p>"
+                + "<br><br>"
+                + "Maciej Grochowski";
     }
 }

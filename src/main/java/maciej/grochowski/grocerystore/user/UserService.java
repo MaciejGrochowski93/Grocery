@@ -2,6 +2,7 @@ package maciej.grochowski.grocerystore.user;
 
 import lombok.AllArgsConstructor;
 import maciej.grochowski.grocerystore.product.Product;
+import maciej.grochowski.grocerystore.registration.email.EmailSender;
 import maciej.grochowski.grocerystore.registration.token.ConfirmationToken;
 import maciej.grochowski.grocerystore.registration.token.ConfirmationTokenService;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,6 +23,7 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ConfirmationTokenService confirmationTokenService;
+    private final EmailSender emailSender;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -31,7 +33,7 @@ public class UserService implements UserDetailsService {
     }
 
     public String signUpUser(User user) {
-        boolean userExists = userRepository.findUserByEmail(user.getFirstName()).isPresent();
+        boolean userExists = userRepository.findUserByEmail(user.getEmail()).isPresent();
         if (userExists) {
             throw new IllegalStateException("This user is already registered.");
         }
