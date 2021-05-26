@@ -9,10 +9,7 @@ import maciej.grochowski.grocerystore.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class ViewController {
@@ -60,37 +57,37 @@ public class ViewController {
     }
 
     @GetMapping("/register")
-    public String addUserForm(Model model) {
-        model.addAttribute("user", new User());
+    public String addRequestForm(Model model) {
+        model.addAttribute("registrationRequest", new RegistrationRequest());
         return "register_page";
     }
 
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute("user") User user) {
-        userService.signUpUser(user);
+    public String registerRequest(@ModelAttribute("registrationRequest") RegistrationRequest request) {
+        registrationService.register(request);
         return "redirect:/user";
     }
 
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
 //    @GetMapping("/register")
-//    public String addRequestForm(Model model) {
-//        model.addAttribute("request", new RegistrationRequest());
+//    public String addUserForm(Model model) {
+//        model.addAttribute("user", new User());
 //        return "register_page";
 //    }
 //
 //    @PostMapping("/register")
-//    public String registerRequest(@ModelAttribute("request") RegistrationRequest request) {
-//        registrationService.register(request);
+//    public String registerUser(@ModelAttribute("user") User user) {
+//        userService.signUpUser(user);
 //        return "redirect:/user";
 //    }
-
-    @PostMapping("/addUser")
-    public String addUser(@ModelAttribute("user") User user) {
-        userService.signUpUser(user);
-        return "redirect:/index";
-    }
-
-    @GetMapping("/login")
-    public String login(){
-        return "login";
-    }
+//
+//    @PostMapping("/addUser")
+//    public String addUser(@ModelAttribute("user") User user) {
+//        userService.signUpUser(user);
+//        return "redirect:/index";
+//    }
 }

@@ -19,5 +19,4 @@ public class RegistrationController {
     public String confirmToken(@RequestParam("token") String token){
         return registrationService.confirmToken(token);
     }
-
 }
