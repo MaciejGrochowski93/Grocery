@@ -32,7 +32,7 @@ public class UserService implements UserDetailsService {
         return user.map(MyUserDetails::new).get();
     }
 
-    public String signUpUser(User user) {
+    public User signUpUser(User user) {
         boolean userExists = userRepository.findUserByEmail(user.getEmail()).isPresent();
         if (userExists) {
             throw new IllegalStateException("This user is already registered.");
@@ -41,7 +41,10 @@ public class UserService implements UserDetailsService {
         String encodedPass = bCryptPasswordEncoder.encode(user.getPassword());
         user.setPassword(encodedPass);
         userRepository.save(user);
+        return user;
+    }
 
+    public String generateToken(User user) {
         String token = UUID.randomUUID().toString();
         ConfirmationToken confirmationToken = new ConfirmationToken(token, LocalDateTime.now(), user);
 

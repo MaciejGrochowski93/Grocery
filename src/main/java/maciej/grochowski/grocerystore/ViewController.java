@@ -63,31 +63,25 @@ public class ViewController {
     }
 
     @PostMapping("/register")
-    public String registerRequest(@ModelAttribute("registrationRequest") RegistrationRequest request) {
-        registrationService.register(request);
+    public String registerRequest(@ModelAttribute("registrationRequest") RegistrationRequest registrationRequest) {
+        registrationService.register(registrationRequest);
         return "redirect:/user";
+    }
+
+//    @PostMapping("/confirm/{token}")
+//    public String confirmRegistration(@PathVariable String token) {
+//        registrationService.confirmToken(token);
+//        return "redirect:/user";
+//    }
+
+    @GetMapping("/confirm")
+    public String confirmToken(@RequestParam("token") String token){
+        registrationService.confirmToken(token);
+        return "redirect:/";
     }
 
     @GetMapping("/login")
     public String login() {
         return "login";
     }
-
-//    @GetMapping("/register")
-//    public String addUserForm(Model model) {
-//        model.addAttribute("user", new User());
-//        return "register_page";
-//    }
-//
-//    @PostMapping("/register")
-//    public String registerUser(@ModelAttribute("user") User user) {
-//        userService.signUpUser(user);
-//        return "redirect:/user";
-//    }
-//
-//    @PostMapping("/addUser")
-//    public String addUser(@ModelAttribute("user") User user) {
-//        userService.signUpUser(user);
-//        return "redirect:/index";
-//    }
 }

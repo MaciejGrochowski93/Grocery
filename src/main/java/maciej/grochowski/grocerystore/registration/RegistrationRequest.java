@@ -3,6 +3,7 @@ package maciej.grochowski.grocerystore.registration;
 import lombok.*;
 
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString

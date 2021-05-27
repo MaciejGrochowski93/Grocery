@@ -19,6 +19,12 @@
             <input type="text" th:field = "*{firstName}" placeholder="Your name:" class="form-control mb-4 col-4" required>
             <button type="submit" class="btn btn-info col-2">Sign in</button>
         </form>
+<!--        <form th:action="@{/register}" th:object="${registrationRequest}" method="POST">-->
+<!--            <input type="text" th:value = "${user.email}" id = "userEmail" name = "userEmail" placeholder="Your email:" class="form-control mb-4 col-4" required>-->
+<!--            <input type="password" th:value = "${user.password}" id = "userPassword" name = "userPassword" placeholder="Your password:" class="form-control mb-4 col-4" required>-->
+<!--            <input type="text" th:value = "${user.firstName}" id = "userFirstName" name = "userFirstName" placeholder="Your name:" class="form-control mb-4 col-4" required>-->
+<!--            <button type="submit" class="btn btn-info col-2">Sign in</button>-->
+<!--        </form>-->
     </div>
         <script src="js/script.js"></script>
         <script>includeHTML();</script>
