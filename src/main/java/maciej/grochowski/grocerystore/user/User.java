@@ -1,5 +1,6 @@
 package maciej.grochowski.grocerystore.user;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,9 +9,8 @@ import maciej.grochowski.grocerystore.product.Product;
 import javax.persistence.*;
 
 @Entity
+@Data
 @NoArgsConstructor
-@Getter
-@Setter
 @Table(name = "user")
 public class User {
 

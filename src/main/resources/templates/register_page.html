@@ -8,25 +8,24 @@
           crossorigin="anonymous">
 </head>
 <body>
-    <div w3-include-html="navUnlogged.html"></div>
-    <div class="container">
-        <h1>Registration</h1>
-        <hr>
-        <h2>Sign in</h2>
-        <form th:action="@{/register}" th:object="${registrationRequest}" method="POST">
-            <input type="text" th:field = "*{email}" placeholder="Your email:" class="form-control mb-4 col-4" required>
-            <input type="password" th:field = "*{password}" placeholder="Your password:" class="form-control mb-4 col-4" required>
-            <input type="text" th:field = "*{firstName}" placeholder="Your name:" class="form-control mb-4 col-4" required>
-            <button type="submit" class="btn btn-info col-2">Sign in</button>
-        </form>
-<!--        <form th:action="@{/register}" th:object="${registrationRequest}" method="POST">-->
-<!--            <input type="text" th:value = "${user.email}" id = "userEmail" name = "userEmail" placeholder="Your email:" class="form-control mb-4 col-4" required>-->
-<!--            <input type="password" th:value = "${user.password}" id = "userPassword" name = "userPassword" placeholder="Your password:" class="form-control mb-4 col-4" required>-->
-<!--            <input type="text" th:value = "${user.firstName}" id = "userFirstName" name = "userFirstName" placeholder="Your name:" class="form-control mb-4 col-4" required>-->
-<!--            <button type="submit" class="btn btn-info col-2">Sign in</button>-->
-<!--        </form>-->
-    </div>
-        <script src="js/script.js"></script>
-        <script>includeHTML();</script>
+<div w3-include-html="navUnlogged.html"></div>
+<div class="container">
+    <h1>Registration</h1>
+    <hr>
+    <h2>Sign in</h2>
+    <form th:action="@{/register}" th:object="${registrationRequest}" method="POST">
+        <input type="text" th:field="*{email}" id="email" placeholder="Your email:" class="form-control mb-4 col-4"
+               minlength="6" maxlength="30" required>
+        <input type="password" th:field="*{password}" placeholder="Your password:" class="form-control mb-4 col-4"
+               minlength="6" maxlength="30" required>
+        <input type="text" th:field="*{firstName}" id="firstName" placeholder="Your name:"
+               minlength="1" maxlength="30" class="form-control mb-4 col-4" required>
+        <button type="submit" class="btn btn-info col-2">Sign in</button>
+    </form>
+</div>
+<script src="js/script.js"></script>
+<script src="js/scriptEmail.js"></script>
+<script>includeHTML();</script>
+
 </body>
 </html>

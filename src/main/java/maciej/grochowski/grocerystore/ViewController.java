@@ -64,15 +64,14 @@ public class ViewController {
 
     @PostMapping("/register")
     public String registerRequest(@ModelAttribute("registrationRequest") RegistrationRequest registrationRequest) {
-        registrationService.register(registrationRequest);
-        return "redirect:/user";
+        try {
+            registrationService.register(registrationRequest);
+        }
+        catch (IllegalStateException e) {
+            System.err.println(e.getMessage());
+        }
+        return "register_page";
     }
-
-//    @PostMapping("/confirm/{token}")
-//    public String confirmRegistration(@PathVariable String token) {
-//        registrationService.confirmToken(token);
-//        return "redirect:/user";
-//    }
 
     @GetMapping("/confirm")
     public String confirmToken(@RequestParam("token") String token){
