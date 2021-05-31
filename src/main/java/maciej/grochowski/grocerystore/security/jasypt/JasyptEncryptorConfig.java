@@ -1,17 +1,16 @@
-package maciej.grochowski.grocerystore;
+package maciej.grochowski.grocerystore.security.jasypt;
 
+import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
-import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-class GroceryStoreApplicationTests {
+@Configuration
+public class JasyptEncryptorConfig {
 
-    @Test
-    void contextLoads() {
-    }
-
-    @Test
-    public void testEncryptionTest() {
+    @Bean(name = "jasyptBean")
+    public StringEncryptor passwordEncryptor() {
         PooledPBEStringEncryptor encryptor = new PooledPBEStringEncryptor();
         SimpleStringPBEConfig config = new SimpleStringPBEConfig();
         config.setPassword("password");
@@ -22,8 +21,6 @@ class GroceryStoreApplicationTests {
         config.setSaltGeneratorClassName("org.jasypt.salt.RandomSaltGenerator");
         config.setStringOutputType("base64");
         encryptor.setConfig(config);
-
-        String text="mySecretPassword";
-        System.out.println("Encrypted key: " + encryptor.encrypt(text));
+        return encryptor;
     }
 }
