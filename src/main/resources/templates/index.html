@@ -1,36 +1,52 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Maciej's Grocery</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <div w3-include-html="navUnlogged.html"></div>
-    <div align="center" >
-        <h1>Maciej's Grocery</h1>
-
+    <div w3-include-html="nav.html"></div>
+    <div align="center">
+        <div sec:authorize="!isAnonymous()">
+            <div class="right">
+                <h5>
+                    <p sec:authentication="principal.username"></p>
+                    <span>Current balance: </span>
+                    <span sec:authentication="principal.money"></span><span> PLN</span>
+                </h5>
+            </div>
+        </div>
         <table border="2" class="table table-bordered" style="width: 60%">
             <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Brand</th>
-                    <th>Price</th>
-                    <th>Category</th>
-                    <th>Country</th>
-                    <th>Expiration</th>
-                </tr>
+            <tr>
+                <th>Name</th>
+                <th>Brand</th>
+                <th>Category</th>
+                <th>Country</th>
+                <th>Expiration</th>
+                <th>Price</th>
+                <div sec:authorize="!isAnonymous()">
+                    <th>Action</th>
+                </div>
+            </tr>
             </thead>
             <tbody>
-                <tr th:each="products : ${productList}">
-                    <td th:text="${products.name}">Name</td>
-                    <td th:text="${products.brand}">Brand</td>
-                    <td th:text="${products.price}">Price</td>
-                    <td th:text="${products.category}">Category</td>
-                    <td th:text="${products.countryProd}">Country</td>
-                    <td th:text="${products.dateExpiration}">Expiration</td>
-                </tr>
+            <tr th:each="products : ${productList}">
+                <td th:text="${products.name}">Name</td>
+                <td th:text="${products.brand}">Brand</td>
+                <td th:text="${products.category}">Category</td>
+                <td th:text="${products.countryProd}">Country</td>
+                <td th:text="${products.dateExpiration}">Expiration</td>
+                <td th:text="${products.price}">Price</td>
+                <div sec:authorize="!isAnonymous()">
+                    <form th:action="@{/buyProductForm}" type="hidden" th:object="${product}" method="PUT">
+                        <td><a th:href="@{/}" class="btn btn-primary">Purchase</a> </td>
+                    </form>
+                </div>
+            </tr>
             </tbody>
         </table>
     </div>

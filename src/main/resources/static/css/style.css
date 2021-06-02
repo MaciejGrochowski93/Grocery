@@ -1,11 +1,4 @@
-*{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-div balance {
-    text-align: right;
-    font-size: 10px;
-    color: aqua;
+.right {
+    display: flex;
+    justify-content: flex-end;
 }
