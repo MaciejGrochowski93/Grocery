@@ -12,7 +12,12 @@
     <h1>Maciej's Grocery</h1>
     <h2>Products list</h2>
     <h2>Welcome, <span sec:authentication="principal.username"></span></h2>
-<!--    <h2>Welcome, <span sec:authentication="principal.money"></span></h2>-->
+        <div class="balance">
+            <h5>Current balance: </h5>
+<!--            <span sec:authentication="principal.money"></span>-->
+            <span> PLN</span>
+        </div>
+        <!--    <h2>Welcome, <span sec:authentication="principal.money"></span></h2>-->
         <table border="2" class="table table-bordered" style="width: 60%">
             <thead>
                 <tr>
