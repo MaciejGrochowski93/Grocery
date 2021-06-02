@@ -26,16 +26,16 @@ public class ViewController {
         return "index";
     }
 
-    @GetMapping("/user")
-    public String buyProductForm(Model model) {
-        model.addAttribute("productList", productService.getAllProducts());
-        return "user_page";
-    }
+//    @GetMapping("/user")
+//    public String buyProductForm(Model model) {
+//        model.addAttribute("productList", productService.getAllProducts());
+//        return "user_page";
+//    }
 
-    @GetMapping("user/buyProductForm")
+    @PutMapping("/buyProductForm")
     public String buyProduct(String email, Product product) {
         userService.buyProduct(email, product);
-        return "redirect:/user";
+        return "redirect:/";
     }
 
     @GetMapping("/admin")

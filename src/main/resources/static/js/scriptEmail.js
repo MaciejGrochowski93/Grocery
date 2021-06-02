@@ -12,4 +12,4 @@
                     e.target.setCustomValidity("Please, insert valid email.");
             }
         };
-        // sprawdź w VisualStudio
+        // VisualStudio?

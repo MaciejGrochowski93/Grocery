@@ -7,39 +7,9 @@
           integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 </head>
 <body>
-    <div w3-include-html="navLogged.html"></div>
+    <div w3-include-html="nav.html"></div>
     <div align="center">
-    <h1>Maciej's Grocery</h1>
-    <h2>Products list</h2>
-    <h2>Welcome, <span sec:authentication="principal.username"></span></h2>
-<!--    <h2>Welcome, <span sec:authentication="principal.money"></span></h2>-->
-        <table border="2" class="table table-bordered" style="width: 60%">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Brand</th>
-                    <th>Price</th>
-                    <th>Category</th>
-                    <th>Country</th>
-                    <th>Expiration</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="products : ${productList}">
-                    <td th:text="${products.name}">Name</td>
-                    <td th:text="${products.brand}">Brand</td>
-                    <td th:text="${products.price}">Price</td>
-                    <td th:text="${products.category}">Category</td>
-                    <td th:text="${products.countryProd}">Country</td>
-                    <td th:text="${products.dateExpiration}">Expiration</td>
-                    <form th:action="@{/buyProductForm}" th:object="${product}" method="GET">
-                        <td><a th:href="@{/user/buyProductForm}" class="btn btn-primary">Purchase</a> </td>
-                    </form>
-<!--                    <td><a th:href="@{/buyProductForm/{id}(id=${products.id})}" class="btn btn-primary">Purchase</a> </td>-->
-                </tr>
-            </tbody>
-        </table>
+        <h2>Welcome, <span sec:authentication="principal.username"></span></h2>
     </div>
     <script src="js/script.js"></script>
     <script>includeHTML();</script>
