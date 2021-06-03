@@ -7,49 +7,49 @@
           integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 </head>
 <body>
-<div w3-include-html="nav.html"></div>
-<div class="container" align = center>
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <hr>
-            <h1>User Login Page</h1>
-            <form th:action="@{/login}" method="post">
-                <div th:if="${param.error}">
-                    <div class="alert alert-danger">Invalid username or password.</div>
-                </div>
-                <div th:if="${param.logout}">
-                    <div class="alert alert-info">You have been logged out.</div>
-                </div>
+    <div w3-include-html="nav.html"></div>
+    <div class="container" align = center>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <hr>
+                <h1>User Login Page</h1>
+                <form th:action="@{/login}" method="post">
+                    <div th:if="${param.error}">
+                        <div class="alert alert-danger">Invalid username or password.</div>
+                    </div>
+                    <div th:if="${param.logout}">
+                        <div class="alert alert-info">You have been logged out.</div>
+                    </div>
 
-                <div class="form-group">
-                    <label for="username">Username : </label>
-                    <input type = "text" class="form control" id="username" name="username"
-                           placeholder="Username:" autofocus="autofocus">
-                </div>
+                    <div class="form-group">
+                        <label for="username">Username : </label>
+                        <input type = "text" class="form control" id="username" name="username"
+                               placeholder="Username:" autofocus="autofocus">
+                    </div>
 
-                <div class="form-group">
-                    <label for="password">Password : </label>
-                    <input type="password" class="form control" id="password" name="password"
-                           placeholder="Password:" autofocus="autofocus">
-                </div>
+                    <div class="form-group">
+                        <label for="password">Password : </label>
+                        <input type="password" class="form control" id="password" name="password"
+                               placeholder="Password:" autofocus="autofocus">
+                    </div>
 
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-sm-6 col-sm-offset-5">
-                            <input type="submit" name="Login-submit" id="Login-submit"
-                                   class="form-control btn btn-primary" value="Log in">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-6 col-sm-offset-5">
+                                <input type="submit" name="Login-submit" id="Login-submit"
+                                       class="form-control btn btn-primary" value="Log in">
+                            </div>
                         </div>
                     </div>
+                </form>
+                <div class="form-group">
+                    <span>
+                        New users can <a href="/" th:href="@{/register}">register here</a>
+                    </span>
                 </div>
-            </form>
-            <div class="form-group">
-                <span>
-                    New users can <a href="/" th:href="@{/register}">register here</a>
-                </span>
             </div>
         </div>
     </div>
-</div>
 
     <script src="js/script.js"></script>
     <script>includeHTML();</script>

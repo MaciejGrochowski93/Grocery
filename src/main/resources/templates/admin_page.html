@@ -5,12 +5,13 @@
     <title>Maciej's Grocery</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
           integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div w3-include-html="nav.html"></div>
+    <div w3-include-html="nav.html"></div>
     <div align="center">
         <h3>Welcome, <span sec:authentication="principal.username"></span></h3>
-        <a th:href="@{/addProduct}" class = "btn btn-primary btn-sm mb-3">Add Product</a>
+        <a th:href="@{/product/addProduct}" class = "btn btn-primary btn-sm mb-3">Add Product</a>
         <table border="2" class="table table-bordered" style="width: 60%">
             <thead>
                 <tr>
@@ -24,17 +25,15 @@
                 </tr>
             </thead>
             <tbody>
-            <tr th:each="products : ${productList}">
-                <td th:text="${products.name}">Name</td>
-                <td th:text="${products.brand}">Brand</td>
-                <td th:text="${products.price}">Price</td>
-                <td th:text="${products.category}">Category</td>
-                <td th:text="${products.countryProd}">Country</td>
-                <td th:text="${products.dateExpiration}">Expiration</td>
-
-<!--                <td><a th:href="@{/updateProductForm/{id}(id=${products.id)}}" class="btn btn-primary">Update</a> </td>-->
-<!--                <td><a th:href="@{/deleteProductForm/{id}(id=${products.id)}}" class="btn btn-primary">Delete</a> </td>-->
-            </tr>
+                <tr th:each="products : ${productList}">
+                    <td th:text="${products.name}">Name</td>
+                    <td th:text="${products.brand}">Brand</td>
+                    <td th:text="${products.price}">Price</td>
+                    <td th:text="${products.category}">Category</td>
+                    <td th:text="${products.countryProd}">Country</td>
+                    <td th:text="${products.dateExpiration}">Expiration</td>
+                    <a th:href="@{/product/update/{id}}" class = "btn btn-primary btn-sm mb-3">Update</a>
+                </tr>
             </tbody>
         </table>
     </div>

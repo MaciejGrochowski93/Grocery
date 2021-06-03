@@ -42,7 +42,7 @@
                 <td th:text="${products.dateExpiration}">Expiration</td>
                 <td th:text="${products.price}">Price</td>
                 <div sec:authorize="!isAnonymous()">
-                    <form th:action="@{/buyProductForm}" type="hidden" th:object="${product}" method="PUT">
+                    <form th:action="@{/product/buyProductForm}" type="hidden" th:object="${product}" method="PUT">
                         <td><a th:href="@{/}" class="btn btn-primary">Purchase</a> </td>
                     </form>
                 </div>
