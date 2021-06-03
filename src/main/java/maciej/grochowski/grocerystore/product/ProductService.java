@@ -2,6 +2,7 @@ package maciej.grochowski.grocerystore.product;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,13 +12,17 @@ import java.util.Optional;
 @AllArgsConstructor
 public class ProductService {
 
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     public List<Product> getAllProducts(){
         return productRepository.findAll();
     }
 
-    public Optional<Product> getProdById(int id){
+    public Product findProductById(Integer id) {
+        return productRepository.findProductById(id);
+    }
+
+    public Optional<Product> getProdById(Integer id){
         return productRepository.findById(id);
     }
 
@@ -26,7 +31,7 @@ public class ProductService {
         productRepository
                 .findAll()
                 .stream()
-                .filter(p -> p.getName().toLowerCase().contains(name))
+                .filter(p -> p.getName().toLowerCase().contains(name.toLowerCase()))
                 .forEach(products::add);
         return products;
     }
@@ -36,7 +41,7 @@ public class ProductService {
         productRepository
                 .findAll()
                 .stream()
-                .filter(e -> e.getCategory().toLowerCase().equals(category))
+                .filter(e -> e.getCategory().equalsIgnoreCase(category))
                 .forEach(products::add);
         return products;
     }
@@ -45,7 +50,11 @@ public class ProductService {
         productRepository.save(product);
     }
 
-    public void deleteProduct(int id){
+    public void updateProduct(Integer id, Product product) {
+        productRepository.save(product);
+    }
+
+    public void deleteProduct(Integer id){
         productRepository.deleteById(id);
     }
 }

@@ -61,8 +61,7 @@ public class UserService implements UserDetailsService {
         return userRepository.enableUser(email);
     }
 
-    public void buyProduct(String email, Product product) {
-        Optional<User> user = userRepository.findUserByEmail(email);
-        user.ifPresent(e -> e.setMoney(e.getMoney() - product.getPrice()));
+    public void buyProduct(User user, Product product) {
+        user.setMoney(user.getMoney() - 1);
     }
 }
