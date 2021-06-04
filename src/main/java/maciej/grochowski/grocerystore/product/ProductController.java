@@ -40,18 +40,12 @@ public class ProductController {
         return "redirect:/admin";
     }
 
-//    @GetMapping("/delete/{id}")
-//    public String deleteProduct(@PathVariable Integer id, Model model) {
-//        productService.findProductById(id)
-//                .ifPresent(product -> model.addAttribute("productForm3", product));
-//        return "redirect:/admin";
-//    }
-//
-//    @DeleteMapping("/delete/{id}")
-//    public String deleteProduct(@PathVariable Integer id) {
-//        productService.deleteProduct(id);
-//        return "redirect:/admin";
-//    }
+    @GetMapping("/delete/{id}")
+    public String deleteProduct(@PathVariable Integer id) {
+        productService.findProductById(id)
+                .ifPresent(product -> productService.deleteProduct(product.getId()));
+        return "redirect:/admin";
+    }
 
     @PutMapping("/buyProductForm")
     public String buyProduct(@ModelAttribute("product") User user, Product product) {

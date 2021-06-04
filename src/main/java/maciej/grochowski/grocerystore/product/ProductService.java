@@ -49,7 +49,7 @@ public class ProductService {
         productRepository.save(product);
     }
 
-//    public void deleteProduct(Integer id) {
-//        productRepository.deleteById(id);
-//    }
+    public void deleteProduct(Integer id) {
+        productRepository.deleteById(id);
+    }
 }
