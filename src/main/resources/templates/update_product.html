@@ -7,25 +7,25 @@
           integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 </head>
 <body>
-<div w3-include-html="nav.html"></div>
-<div class="container">
-    <h1>Product</h1>
-    <hr>
-    <h2>Add product</h2>
-    <form th:action="@{/product/update/{id}}" th:object="${productForm}" method="PUT">
-        <input type="text" th:field="*{name}" placeholder="Product's name" class="form-control mb-4 col-4"
-               minlength="1" maxlength="40" required/>
-        <input type="text" th:field="*{brand}" placeholder="Product's brand" class="form-control mb-4 col-4"
-               minlength="1" maxlength="40"/>
-        <input type="number" th:field="*{price}" placeholder="Product's price" class="form-control mb-4 col-4"
-               min="0.29" step="0.01" required/>
-        <input type="text" th:field="*{category}" placeholder="Product's category" class="form-control mb-4 col-4"
-               minlength="1" maxlength="20" required/>
-        <input type="text" th:field="*{countryProd}" placeholder="Product's country" class="form-control mb-4 col-4" />
-        <input type="date" th:field="*{dateExpiration}" placeholder="Product's expiration" class="form-control mb-4 col-4"/>
-        <button type="submit" class="btn btn-info col-1">Add Product</button>
-    </form>
-</div>
+    <div w3-include-html="nav.html"></div>
+    <div class="container">
+        <h1>Product</h1>
+        <hr>
+        <h2>Update product</h2>
+        <form th:action="@{'/product/update/' + ${productForm2.id}}" th:object="${productForm2}" method="POST">
+            <input type="text" th:field="*{name}" placeholder="Product's name" class="form-control mb-4 col-4"
+                   minlength="1" maxlength="40" required/>
+            <input type="text" th:field="*{brand}" placeholder="Product's brand" class="form-control mb-4 col-4"
+                   minlength="1" maxlength="40"/>
+            <input type="number" th:field="*{price}" placeholder="Product's price" class="form-control mb-4 col-4"
+                   min="0.29" step="0.01" required/>
+            <input type="text" th:field="*{category}" placeholder="Product's category" class="form-control mb-4 col-4"
+                   minlength="1" maxlength="20" required/>
+            <input type="text" th:field="*{countryProd}" placeholder="Product's country" class="form-control mb-4 col-4" />
+            <input type="date" th:field="*{dateExpiration}" placeholder="Product's expiration" class="form-control mb-4 col-4"/>
+            <button type="submit" class="btn btn-info col-1">Update Product</button>
+        </form>
+    </div>
 <script src="js/script.js"></script>
 <script>includeHTML();</script>
 </body>

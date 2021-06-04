@@ -20,15 +20,14 @@ public class RegistrationController {
     public String registerRequest(@ModelAttribute("registrationRequest") RegistrationRequest registrationRequest) {
         try {
             registrationService.register(registrationRequest);
-        }
-        catch (IllegalStateException e) {
+        } catch (IllegalStateException e) {
             System.err.println(e.getMessage());
         }
         return "register_page";
     }
 
     @GetMapping("/confirm")
-    public String confirmToken(@RequestParam("token") String token){
+    public String confirmToken(@RequestParam("token") String token) {
         registrationService.confirmToken(token);
         return "redirect:/";
     }

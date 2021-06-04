@@ -11,7 +11,8 @@
     <div w3-include-html="nav.html"></div>
     <div align="center">
         <h3>Welcome, <span sec:authentication="principal.username"></span></h3>
-        <a th:href="@{/product/addProduct}" class = "btn btn-primary btn-sm mb-3">Add Product</a>
+        <a th:href="@{/product/addProduct}" class = "btn btn-success">Add Product</a>
+        <br><br>
         <table border="2" class="table table-bordered" style="width: 60%">
             <thead>
                 <tr>
@@ -32,7 +33,10 @@
                     <td th:text="${products.category}">Category</td>
                     <td th:text="${products.countryProd}">Country</td>
                     <td th:text="${products.dateExpiration}">Expiration</td>
-                    <a th:href="@{/product/update/{id}}" class = "btn btn-primary btn-sm mb-3">Update</a>
+                    <td>
+                        <a th:href="@{'/product/update/' + ${products.id}}" class="btn btn-primary">Update</a>
+                        <a th:href="@{'/product/delete/' + ${products.id}}" class="btn btn-danger">Delete</a>
+                    </td>
                 </tr>
             </tbody>
         </table>
