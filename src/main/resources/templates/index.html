@@ -13,9 +13,12 @@
         <div sec:authorize="!isAnonymous()">
             <div class="right">
                 <h5>
+                    <br>
                     <p sec:authentication="principal.username"></p>
                     <span>Current balance: </span>
                     <span sec:authentication="principal.money"></span><span> PLN</span>
+                    <br>
+                    <p><a href="/cart">Check my cart</a></p>
                 </h5>
             </div>
         </div>
@@ -42,7 +45,10 @@
                 <td th:text="${products.countryProd}">Country</td>
                 <td th:text="${products.dateExpiration}">Expiration</td>
                 <td th:text="${products.price}">Price</td>
-                <td><a th:href="@{/cart}" class="btn btn-primary">Purchase</a> </td>
+<!--                <td><a th:href="@{/cart}" class="btn btn-primary">Purchase</a> </td>-->
+                <div sec:authorize="!isAnonymous()">
+                <td><a th:href="@{'/cart/addCartProduct/' + ${products.id}}" class="btn btn-primary">Purchase</a> </td>
+                </div>
             </tr>
             </tbody>
         </table>
