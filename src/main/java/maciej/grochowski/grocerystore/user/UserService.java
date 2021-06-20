@@ -61,7 +61,6 @@ public class UserService implements UserDetailsService {
         return userRepository.enableUser(email);
     }
 
-    public void buyProduct(User user, Product product) {
-        user.setMoney(user.getMoney() - 1);
+    public void buyProduct(double price) {;
     }
 }

@@ -48,7 +48,7 @@ public class ProductController {
 
     @PutMapping("/buyProductForm")
     public String buyProduct(@ModelAttribute("product") User user, Product product) {
-        userService.buyProduct(user, product);
+        userService.buyProduct(product.getPrice());
         return "new_product";
     }
 }

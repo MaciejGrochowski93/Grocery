@@ -46,9 +46,14 @@
             <td th:text="${products.dateExpiration}">Expiration</td>
             <td th:text="${products.price}">Price</td>
             <td>
-                <a th:href="@{'/cart/addCartProduct/' + ${products.id}}" class="btn btn-primary">Purchase</a>
                 <a th:href="@{'/cart/deleteCartProduct/' + ${products.id}}" class="btn btn-danger">Remove</a>
             </td>
+<!--                <a th:href="@{'/cart/addCartProduct/' + ${products.id}}" class="btn btn-primary">Purchase</a>-->
+        </tr>
+        <tr>
+                <td></td><td></td><td></td><td></td><td></td>
+                <td><a th:href="@{/cart/cartProductsPrice}"></a></td>
+                <td><a th:href="@{/cart/buyCartProduct}" class="btn btn-primary">Purchase</a> </td>
         </tr>
         </tbody>
     </table>

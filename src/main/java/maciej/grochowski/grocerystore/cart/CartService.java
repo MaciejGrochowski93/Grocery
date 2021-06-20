@@ -29,9 +29,12 @@ public class CartService {
         cartProducts.remove(productRepository.findProductById(product.getId()));
     }
 
-    public void buyCartProduct(Product product) {
-        Product boughtProduct = cartProducts.get(product.getId());
-        Double productPrice = boughtProduct.getPrice();
-
+    public double getCartProductPrice() {
+        List<Product> allCartProducts = getAllCartProducts();
+        double totalPrice = 0;
+        for (Product p : allCartProducts) {
+            totalPrice += p.getPrice();
+        }
+        return totalPrice;
     }
 }
