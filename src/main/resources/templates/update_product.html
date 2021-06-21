@@ -7,7 +7,7 @@
           integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 </head>
 <body>
-    <div w3-include-html="nav.html"></div>
+    <div th:replace="fragments/nav :: navbar"></div>
     <div class="container">
         <h1>Product</h1>
         <hr>
@@ -26,7 +26,5 @@
             <button type="submit" class="btn btn-info col-1">Update Product</button>
         </form>
     </div>
-<script src="js/script.js"></script>
-<script>includeHTML();</script>
 </body>
 </html>

@@ -8,7 +8,7 @@
           crossorigin="anonymous">
 </head>
 <body>
-    <div w3-include-html="nav.html"></div>
+    <div th:replace="fragments/nav :: navbar"></div>
     <div class="container">
         <h1>Registration</h1>
         <hr>
@@ -25,7 +25,5 @@
     </div>
     <script src="js/script.js"></script>
     <script src="js/scriptEmail.js"></script>
-    <script>includeHTML();</script>
-
 </body>
 </html>

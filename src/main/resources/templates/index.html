@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <div w3-include-html="nav.html"></div>
+    <div th:replace="fragments/nav :: navbar"></div>
     <div align="center">
         <div sec:authorize="!isAnonymous()">
             <div class="right">
@@ -22,7 +22,9 @@
                 </h5>
             </div>
         </div>
-
+        <div sec:authorize="isAnonymous()">
+            <br><br><br>
+        </div>
         <table border="2" class="table table-bordered" style="width: 60%">
             <thead>
             <tr>
@@ -53,7 +55,5 @@
             </tbody>
         </table>
     </div>
-    <script src="js/script.js"></script>
-    <script>includeHTML();</script>
 </body>
 </html>

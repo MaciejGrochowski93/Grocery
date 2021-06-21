@@ -7,11 +7,9 @@
           integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 </head>
 <body>
-    <div w3-include-html="nav.html"></div>
+    <div th:replace="fragments/nav :: navbar"></div>
     <div align="center">
         <h2>Welcome, <span sec:authentication="principal.username"></span></h2>
     </div>
-    <script src="js/script.js"></script>
-    <script>includeHTML();</script>
 </body>
 </html>
