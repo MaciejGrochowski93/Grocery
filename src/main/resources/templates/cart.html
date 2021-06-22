@@ -47,11 +47,10 @@
             <td>
                 <a th:href="@{'/cart/deleteCartProduct/' + ${products.id}}" class="btn btn-danger">Remove</a>
             </td>
-<!--                <a th:href="@{'/cart/addCartProduct/' + ${products.id}}" class="btn btn-primary">Purchase</a>-->
         </tr>
         <tr>
                 <td></td><td></td><td></td><td></td><td></td>
-                <td><a th:href="@{/cart/cartProductsPrice}"></a></td>
+                <td><span>Σ </span><a th:text="${cartProductPrice}"></a></td>
                 <td><a th:href="@{/cart/buyCartProduct}" class="btn btn-primary">Purchase</a> </td>
         </tr>
         </tbody>

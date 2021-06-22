@@ -21,12 +21,13 @@ public class CartController {
     @GetMapping()
     public String cartListPage(Model model) {
         model.addAttribute("cartProductList", cartService.getAllCartProducts());
+        model.addAttribute("cartProductPrice", cartService.getCartProductsPrice());
         return "cart";
     }
 
     @GetMapping("/cartProductsPrice")
     public String getCartProductsPrice(ModelAndView model) {
-        double totalPrice = cartService.getCartProductPrice();
+        double totalPrice = cartService.getCartProductsPrice();
         model.addObject("totalPrice", totalPrice);
         return "redirect:/admin";
     }

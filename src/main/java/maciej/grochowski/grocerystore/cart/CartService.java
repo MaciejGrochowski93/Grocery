@@ -29,7 +29,7 @@ public class CartService {
         cartProducts.remove(productRepository.findProductById(product.getId()));
     }
 
-    public double getCartProductPrice() {
+    public double getCartProductsPrice() {
         List<Product> allCartProducts = getAllCartProducts();
         double totalPrice = 0;
         for (Product p : allCartProducts) {

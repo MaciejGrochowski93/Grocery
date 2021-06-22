@@ -89,4 +89,6 @@ public class MyUserDetails implements UserDetails {
     public Double getMoney() {
         return this.money;
     }
+
+    //setter
 }

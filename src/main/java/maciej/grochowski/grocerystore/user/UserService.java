@@ -1,7 +1,6 @@
 package maciej.grochowski.grocerystore.user;
 
 import lombok.AllArgsConstructor;
-import maciej.grochowski.grocerystore.product.Product;
 import maciej.grochowski.grocerystore.registration.email.EmailSender;
 import maciej.grochowski.grocerystore.registration.token.ConfirmationToken;
 import maciej.grochowski.grocerystore.registration.token.ConfirmationTokenService;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -27,9 +25,11 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<User> user = userRepository.findUserByEmail(email);
-        user.orElseThrow(() -> new UsernameNotFoundException("User " + email + " not found."));
-        return user.map(MyUserDetails::new).get();
+        User user = userRepository.findUserByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User " + email + " not found."));
+        return new MyUserDetails(user);
+//        Optional<User> user = userRepository.findUserByEmail(email);
+//        user.orElseThrow(() -> new UsernameNotFoundException("User " + email + " not found."));
+//        return user.map(MyUserDetails::new).get();
     }
 
     public User signUpUser(User user) {
@@ -46,7 +46,7 @@ public class UserService implements UserDetailsService {
 
     public String generateToken(User user) {
         String token = UUID.randomUUID().toString();
-        ConfirmationToken confirmationToken = new ConfirmationToken(token, LocalDateTime.now(), user);
+        var confirmationToken = new ConfirmationToken(token, LocalDateTime.now(), user);
 
         confirmationTokenService.saveToken(confirmationToken);
 
@@ -61,6 +61,6 @@ public class UserService implements UserDetailsService {
         return userRepository.enableUser(email);
     }
 
-    public void buyProduct(double price) {;
+    public void buyProduct(double price) {
     }
 }

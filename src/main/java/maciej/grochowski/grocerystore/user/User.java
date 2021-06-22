@@ -40,5 +40,4 @@ public class User {
     public void buyProduct(Product product) {
         this.setMoney(this.getMoney() - product.getPrice());
     }
-
 }
