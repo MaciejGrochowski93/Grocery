@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import maciej.grochowski.grocerystore.product.Product;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
@@ -33,11 +34,5 @@ public class User {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
-    }
-
-    // TODO customize validation errors
-
-    public void buyProduct(Product product) {
-        this.setMoney(this.getMoney() - product.getPrice());
     }
 }

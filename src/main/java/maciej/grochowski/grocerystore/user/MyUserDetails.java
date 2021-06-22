@@ -85,10 +85,4 @@ public class MyUserDetails implements UserDetails {
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
-
-    public Double getMoney() {
-        return this.money;
-    }
-
-    //setter
 }

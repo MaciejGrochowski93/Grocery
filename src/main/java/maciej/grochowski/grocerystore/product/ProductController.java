@@ -45,10 +45,4 @@ public class ProductController {
         productService.deleteProduct(id);
         return "redirect:/admin";
     }
-
-    @PutMapping("/buyProductForm")
-    public String buyProduct(@ModelAttribute("product") User user, Product product) {
-        userService.buyProduct(product.getPrice());
-        return "new_product";
-    }
 }

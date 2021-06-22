@@ -1,21 +1,26 @@
 package maciej.grochowski.grocerystore.cart;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import maciej.grochowski.grocerystore.product.Product;
 import maciej.grochowski.grocerystore.product.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import maciej.grochowski.grocerystore.user.MyUserDetails;
+import maciej.grochowski.grocerystore.user.User;
+import maciej.grochowski.grocerystore.user.UserRepository;
+import maciej.grochowski.grocerystore.user.UserService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class CartService {
 
-    @Autowired
-    private ProductRepository productRepository;
-    private ArrayList<Product> cartProducts = new ArrayList<>();
+    private final ProductRepository productRepository;
+    private final UserService userService;
+    private final UserRepository userRepository;
+    private final ArrayList<Product> cartProducts = new ArrayList<>();
 
     public List<Product> getAllCartProducts() {
         return cartProducts;
@@ -27,6 +32,17 @@ public class CartService {
 
     public void deleteCartProduct(Product product) {
         cartProducts.remove(productRepository.findProductById(product.getId()));
+    }
+
+    public void deleteAllCartProducts() {
+        cartProducts.clear();
+    }
+
+    public void buyCartProducts() {
+        User user = userService.getPrincipal();
+
+        user.setMoney(user.getMoney() - getCartProductsPrice());
+        userRepository.save(user);
     }
 
     public double getCartProductsPrice() {

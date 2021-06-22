@@ -29,26 +29,20 @@ public class CartController {
     public String getCartProductsPrice(ModelAndView model) {
         double totalPrice = cartService.getCartProductsPrice();
         model.addObject("totalPrice", totalPrice);
-        return "redirect:/admin";
+        return "redirect:/cart";
     }
-
-//            @PostMapping("/cartProductsPrice")
-//            public String getCartProductsPrice(@ModelAttribute Double price) {
-//                cartService.getCartProductPrice();
-//                return "redirect:/admin";
-//            }
-
-//    @GetMapping("/buyCartProduct")
-//    public String buyCartProduct(Product product) {
-//        double price = cartService.buyCartProduct(product);
-//        userService.buyProduct(price);
-//        return "redirect:/";
-//    }
 
     @GetMapping("/addCartProduct/{id}")
     public String addCartProductForm(@PathVariable Integer id, Product product) {
         cartService.addCartProduct(product);
         return "redirect:/";
+    }
+
+    @GetMapping("/buyCartProduct")
+    public String buyCartProduct() {
+        cartService.buyCartProducts();
+        cartService.deleteAllCartProducts();
+        return "redirect:/cart";
     }
 
     @GetMapping("/deleteCartProduct/{id}")

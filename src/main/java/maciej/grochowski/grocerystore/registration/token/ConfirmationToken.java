@@ -41,5 +41,4 @@ public class ConfirmationToken {
         this.expirationTime = this.creationTime.plusMinutes(20);
         this.user = user;
     }
-
 }
