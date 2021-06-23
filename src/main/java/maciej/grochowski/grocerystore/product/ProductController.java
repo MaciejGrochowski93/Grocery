@@ -1,7 +1,6 @@
 package maciej.grochowski.grocerystore.product;
 
 import lombok.AllArgsConstructor;
-import maciej.grochowski.grocerystore.user.User;
 import maciej.grochowski.grocerystore.user.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 public class ProductController {
 
     private final ProductService productService;
-    private final UserService userService;
 
     @GetMapping("/addProduct")
     public String addProductForm(Model model) {

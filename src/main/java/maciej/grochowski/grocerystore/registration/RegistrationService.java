@@ -6,6 +6,8 @@ import maciej.grochowski.grocerystore.registration.token.ConfirmationToken;
 import maciej.grochowski.grocerystore.registration.token.ConfirmationTokenService;
 import maciej.grochowski.grocerystore.user.User;
 import maciej.grochowski.grocerystore.user.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,10 +42,10 @@ public class RegistrationService {
     }
 
     @Transactional
-    public String confirmToken(String token) {
-        ConfirmationToken confirmationToken =confirmationTokenService
-                        .getToken(token)
-                        .orElseThrow(() -> new IllegalStateException("Token was not found."));
+    public void confirmToken(String token) {
+        ConfirmationToken confirmationToken = confirmationTokenService
+                .getToken(token)
+                .orElseThrow(() -> new IllegalStateException("Token was not found."));
 
         if (confirmationToken.getConfirmationTime() != null) {
             throw new IllegalStateException("Email is already confirmed.");
@@ -55,7 +57,6 @@ public class RegistrationService {
 
         confirmationTokenService.confirmToken(token);
         userService.enableUser(confirmationToken.getUser().getEmail());
-        return "Token confirmed.";
     }
 
     private String buildEmail(String name, String link) {

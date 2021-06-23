@@ -1,6 +1,7 @@
 package maciej.grochowski.grocerystore.registration;
 
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Size;
 

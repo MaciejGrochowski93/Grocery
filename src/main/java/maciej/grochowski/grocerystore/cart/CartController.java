@@ -2,7 +2,6 @@ package maciej.grochowski.grocerystore.cart;
 
 import lombok.AllArgsConstructor;
 import maciej.grochowski.grocerystore.product.Product;
-import maciej.grochowski.grocerystore.user.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class CartController {
 
     private final CartService cartService;
-    private final UserService userService;
 
     @GetMapping()
     public String cartListPage(Model model) {

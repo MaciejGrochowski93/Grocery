@@ -1,6 +1,5 @@
 package maciej.grochowski.grocerystore.product;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

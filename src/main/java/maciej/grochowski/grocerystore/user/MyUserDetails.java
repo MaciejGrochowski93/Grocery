@@ -46,7 +46,7 @@ public class MyUserDetails implements UserDetails {
         return this.email;
     }
 
-    public String getFirstName(){
+    public String getFirstName() {
         return firstName;
     }
 
@@ -84,5 +84,13 @@ public class MyUserDetails implements UserDetails {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public Double getMoney() {
+        return money;
+    }
+
+    public void setMoney(Double money) {
+        this.money = money;
     }
 }

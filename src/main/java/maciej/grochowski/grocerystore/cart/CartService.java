@@ -3,11 +3,12 @@ package maciej.grochowski.grocerystore.cart;
 import lombok.AllArgsConstructor;
 import maciej.grochowski.grocerystore.product.Product;
 import maciej.grochowski.grocerystore.product.ProductRepository;
-import maciej.grochowski.grocerystore.user.MyUserDetails;
 import maciej.grochowski.grocerystore.user.User;
 import maciej.grochowski.grocerystore.user.UserRepository;
 import maciej.grochowski.grocerystore.user.UserService;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -40,7 +41,6 @@ public class CartService {
 
     public void buyCartProducts() {
         User user = userService.getPrincipal();
-
         user.setMoney(user.getMoney() - getCartProductsPrice());
         userRepository.save(user);
     }

@@ -1,10 +1,7 @@
 package maciej.grochowski.grocerystore.user;
 
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import maciej.grochowski.grocerystore.product.Product;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
@@ -13,6 +10,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @Table(name = "user")
+@DynamicUpdate
 public class User {
 
     @Id
