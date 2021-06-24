@@ -20,19 +20,12 @@ public class User {
     @Column(name = "id")
     private Integer id;
 
-//    @NotEmpty(message = "Please, provide your email.")
-//    @Size(min = 6, max = 30)
-    @Length(min = 6, max = 30, message = "Email length must be between 6 - 30")
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
-    //    @NotEmpty(message = "Please, set your password.")
-//    @Size(min = 6, max = 30)
     @Column(name = "password")
     private String password;
 
-    //    @NotEmpty(message = "Please, provide your name.")
-//    @Size(min = 1, max = 30)
     @Column(name = "first_name")
     private String firstName;
 

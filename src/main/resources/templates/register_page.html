@@ -14,15 +14,24 @@
         <hr>
         <h2>Sign in</h2>
         <form th:action="@{/register}" th:object="${registrationRequest}" method="POST">
-            <input type="text" th:field="*{email}" id="email" placeholder="Your email:" class="form-control mb-4 col-4"
-                   required minlength="6" maxlength="30">
-            <input type="password" th:field="*{password}" placeholder="Your password:" class="form-control mb-4 col-4"
-                   required minlength="6" maxlength="30">
-            <input type="text" th:field="*{firstName}" id="firstName" placeholder="Your name:"
-                   required minlength="1" maxlength="30" class="form-control mb-4 col-4">
+
+            <input type="text" th:field="*{email}" id="email" placeholder="Your email:" class="form-control mb-4 col-4"/>
+            <div th:fragment="validation-error">
+                <div  th:if="${#fields.hasErrors('email')}" class="alert alert-warning" th:errors="*{email}"></div>
+            </div>
+
+            <input type="password" th:field="*{password}" placeholder="Your password:" class="form-control mb-4 col-4"/>
+            <div th:fragment="validation-error">
+                <div  th:if="${#fields.hasErrors('password')}" class="alert alert-warning" th:errors="*{password}"></div>
+            </div>
+
+            <input type="text" th:field="*{firstName}" id="firstName" placeholder="Your name:" class="form-control mb-4 col-4"/>
+            <div th:fragment="validation-error">
+                <div  th:if="${#fields.hasErrors('firstName')}" class="alert alert-warning" th:errors="*{firstName}"></div>
+            </div>
+
             <button type="submit" class="btn btn-info col-2">Sign in</button>
         </form>
     </div>
-    <script src="js/scriptMail.js"></script>
 </body>
 </html>

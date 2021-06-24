@@ -26,25 +26,30 @@ public class RegistrationController {
         return "register_page";
     }
 
-//    @PostMapping("/register")
-//    public String registerRequest(@ModelAttribute("registrationRequest") @Valid RegistrationRequest registrationRequest,
-//                                  BindingResult result) {
-//        if (result.hasErrors()) {
-//            return "register_page";
-//        }
-//        registrationService.register(registrationRequest);
-//        return "/";
-//    }
-
     @PostMapping("/register")
-    public String registerRequest(@ModelAttribute("registrationRequest") RegistrationRequest registrationRequest) {
+    public String registerRequest(@ModelAttribute("registrationRequest")
+                                  @Valid RegistrationRequest registrationRequest,
+                                  BindingResult result) {
+        if (result.hasErrors()) {
+            return "register_page";
+        }
         try {
             registrationService.register(registrationRequest);
         } catch (IllegalStateException e) {
             LOGGER.error(e.getMessage());
         }
-        return "register_page";
+        return "index";
     }
+
+//    @PostMapping("/register")
+//    public String registerRequest(@ModelAttribute("registrationRequest") RegistrationRequest registrationRequest) {
+//        try {
+//            registrationService.register(registrationRequest);
+//        } catch (IllegalStateException e) {
+//            LOGGER.error(e.getMessage());
+//        }
+//        return "register_page";
+//    }
 
     @GetMapping("/confirm")
     public String confirmToken(@RequestParam("token") String token) {

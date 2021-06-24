@@ -3,7 +3,10 @@ package maciej.grochowski.grocerystore.product;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @AllArgsConstructor
@@ -19,9 +22,13 @@ public class ProductController {
     }
 
     @PostMapping("/addProduct")
-    public String addNewProduct(@ModelAttribute("productForm") Product product) {
+    public String addNewProduct(@ModelAttribute("productForm") @Valid Product product,
+                                BindingResult result) {
+        if (result.hasErrors()) {
+            return "new_product";
+        }
         productService.addProduct(product);
-        return "redirect:/admin";
+        return "admin";
     }
 
     @GetMapping("/update/{id}")

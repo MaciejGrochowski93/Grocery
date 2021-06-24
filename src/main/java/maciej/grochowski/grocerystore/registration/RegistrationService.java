@@ -1,16 +1,17 @@
 package maciej.grochowski.grocerystore.registration;
 
+import com.sun.mail.smtp.SMTPAddressFailedException;
 import lombok.AllArgsConstructor;
 import maciej.grochowski.grocerystore.registration.email.EmailSender;
 import maciej.grochowski.grocerystore.registration.token.ConfirmationToken;
 import maciej.grochowski.grocerystore.registration.token.ConfirmationTokenService;
 import maciej.grochowski.grocerystore.user.User;
 import maciej.grochowski.grocerystore.user.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.mail.MailSendException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.mail.SendFailedException;
 import java.time.LocalDateTime;
 
 @Service
@@ -37,7 +38,11 @@ public class RegistrationService {
 
         String link = "http://localhost:8080/confirm?token=" + token;
 
-        emailSender.sendMail(request.getEmail(), buildEmail(request.getFirstName(), link));
+        try{
+            emailSender.sendMail(request.getEmail(), buildEmail(request.getFirstName(), link));
+        } catch (MailSendException e) {
+            e.getFailedMessages();
+        }
         return token;
     }
 
