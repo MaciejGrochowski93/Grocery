@@ -11,8 +11,8 @@ public class JasyptEncryptorConfig {
 
     @Bean(name = "jasyptBean")
     public StringEncryptor passwordEncryptor() {
-        PooledPBEStringEncryptor encryptor = new PooledPBEStringEncryptor();
-        SimpleStringPBEConfig config = new SimpleStringPBEConfig();
+        var encryptor = new PooledPBEStringEncryptor();
+        var config = new SimpleStringPBEConfig();
         config.setPassword("password");
         config.setAlgorithm("PBEWithMD5AndDES");
         config.setKeyObtentionIterations("1000");

@@ -3,10 +3,17 @@ package maciej.grochowski.grocerystore.registration;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-@RestController
+import javax.validation.Valid;
+
+@Controller
 @AllArgsConstructor
 public class RegistrationController {
 
@@ -18,6 +25,16 @@ public class RegistrationController {
         model.addAttribute("registrationRequest", new RegistrationRequest());
         return "register_page";
     }
+
+//    @PostMapping("/register")
+//    public String registerRequest(@ModelAttribute("registrationRequest") @Valid RegistrationRequest registrationRequest,
+//                                  BindingResult result) {
+//        if (result.hasErrors()) {
+//            return "register_page";
+//        }
+//        registrationService.register(registrationRequest);
+//        return "/";
+//    }
 
     @PostMapping("/register")
     public String registerRequest(@ModelAttribute("registrationRequest") RegistrationRequest registrationRequest) {

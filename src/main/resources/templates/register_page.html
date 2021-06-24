@@ -15,15 +15,14 @@
         <h2>Sign in</h2>
         <form th:action="@{/register}" th:object="${registrationRequest}" method="POST">
             <input type="text" th:field="*{email}" id="email" placeholder="Your email:" class="form-control mb-4 col-4"
-                   minlength="6" maxlength="30" required>
+                   required minlength="6" maxlength="30">
             <input type="password" th:field="*{password}" placeholder="Your password:" class="form-control mb-4 col-4"
-                   minlength="6" maxlength="30" required>
+                   required minlength="6" maxlength="30">
             <input type="text" th:field="*{firstName}" id="firstName" placeholder="Your name:"
-                   minlength="1" maxlength="30" class="form-control mb-4 col-4" required>
+                   required minlength="1" maxlength="30" class="form-control mb-4 col-4">
             <button type="submit" class="btn btn-info col-2">Sign in</button>
         </form>
     </div>
-    <script src="js/script.js"></script>
-    <script src="js/scriptEmail.js"></script>
+    <script src="js/scriptMail.js"></script>
 </body>
 </html>
