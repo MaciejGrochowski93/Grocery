@@ -1,9 +1,11 @@
 package maciej.grochowski.grocerystore.cart;
 
 import lombok.AllArgsConstructor;
+import maciej.grochowski.grocerystore.exception.NotEnoughMoneyException;
 import maciej.grochowski.grocerystore.product.Product;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,10 +38,31 @@ public class CartController {
         return "redirect:/";
     }
 
+    //    @PostMapping("/add")
+//    public String addUser(@Valid User user, BindingResult result, Model model) {
+//        String err = validationService.validateUser(user);
+//        if (!err.isEmpty()) {
+//            ObjectError error = new ObjectError("globalError", err);
+//            result.addError(error);
+//        }
+//        if (result.hasErrors()) {
+//            return "errors/addUser";
+//        }
+//        repository.save(user);
+//        model.addAttribute("users", repository.findAll());
+//        return "errors/home";
+//    }
+
     @GetMapping("/buyCartProduct")
-    public String buyCartProduct() {
-        cartService.buyCartProducts();
-        cartService.deleteAllCartProducts();
+    public String buyCartProduct(BindingResult result) {
+        if (result.hasErrors()) {
+            try {
+                cartService.buyCartProducts();
+                cartService.deleteAllCartProducts();
+            } catch (NotEnoughMoneyException e) {
+                return "redirect:/cart";
+            }
+        }
         return "redirect:/cart";
     }
 

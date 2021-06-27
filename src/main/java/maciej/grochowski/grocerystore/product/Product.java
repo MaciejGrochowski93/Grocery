@@ -28,7 +28,6 @@ public class Product {
     private String brand;
 
     @NotNull
-    @Length(min = 1, max = 6, message = "Price has to be a non negative number.")
     @Column(name = "price")
     private Double price;
 

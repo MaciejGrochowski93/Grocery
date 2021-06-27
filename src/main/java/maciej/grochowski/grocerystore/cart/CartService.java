@@ -1,14 +1,12 @@
 package maciej.grochowski.grocerystore.cart;
 
 import lombok.AllArgsConstructor;
+import maciej.grochowski.grocerystore.exception.NotEnoughMoneyException;
 import maciej.grochowski.grocerystore.product.Product;
 import maciej.grochowski.grocerystore.product.ProductRepository;
 import maciej.grochowski.grocerystore.user.User;
 import maciej.grochowski.grocerystore.user.UserRepository;
 import maciej.grochowski.grocerystore.user.UserService;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -39,9 +37,15 @@ public class CartService {
         cartProducts.clear();
     }
 
-    public void buyCartProducts() {
+    public void buyCartProducts() throws NotEnoughMoneyException {
         User user = userService.getPrincipal();
-        user.setMoney(user.getMoney() - getCartProductsPrice());
+        double userMoney = user.getMoney();
+        double cartPrice = getCartProductsPrice();
+
+        if (userMoney < cartPrice) {
+            throw new NotEnoughMoneyException();
+        }
+        user.setMoney(userMoney - cartPrice);
         userRepository.save(user);
     }
 

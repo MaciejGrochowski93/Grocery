@@ -41,16 +41,6 @@ public class RegistrationController {
         return "index";
     }
 
-//    @PostMapping("/register")
-//    public String registerRequest(@ModelAttribute("registrationRequest") RegistrationRequest registrationRequest) {
-//        try {
-//            registrationService.register(registrationRequest);
-//        } catch (IllegalStateException e) {
-//            LOGGER.error(e.getMessage());
-//        }
-//        return "register_page";
-//    }
-
     @GetMapping("/confirm")
     public String confirmToken(@RequestParam("token") String token) {
         registrationService.confirmToken(token);

@@ -52,7 +52,13 @@
                 <td></td><td></td><td></td><td></td><td></td>
                 <td><span>Σ </span><a th:text="${cartProductPrice}"></a></td>
                 <td><a th:href="@{/cart/buyCartProduct}" class="btn btn-primary">Purchase</a> </td>
+
+                <div th:if="${#fields.hasAnyErrors()}">
+                        <p th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+                </div>
+
         </tr>
+        <tr th:text="${exception}"></tr>
         </tbody>
     </table>
 </div>
