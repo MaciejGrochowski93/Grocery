@@ -3,9 +3,9 @@ package maciej.grochowski.grocerystore.user;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Data
@@ -30,7 +30,7 @@ public class User {
     private String firstName;
 
     @Column(name = "money")
-    private Double money = 100.00;
+    private BigDecimal money;
 
     @Column(name = "enabled")
     private Boolean enabled = false;

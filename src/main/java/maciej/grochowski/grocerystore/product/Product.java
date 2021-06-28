@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
@@ -27,9 +28,9 @@ public class Product {
     @Column(name = "brand")
     private String brand;
 
-    @NotNull
-    @Column(name = "price")
-    private Double price;
+    @Column(name = "price", nullable = false)
+    @DecimalMin(value = "0.00", message = "*Price has to be non negative number")
+    private BigDecimal price;
 
     @NotNull
     @Length(min = 1, max = 50, message = "Your email must consist of 6 to 30 letters.")

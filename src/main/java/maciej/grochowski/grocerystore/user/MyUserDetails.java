@@ -4,6 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -14,7 +15,7 @@ public class MyUserDetails implements UserDetails {
     private String email;
     private String password;
     private String firstName;
-    private Double money = 100.00;
+    private BigDecimal money = BigDecimal.valueOf(100.00);
     private Boolean enabled;
     private Boolean locked = false;
     private List<GrantedAuthority> grantedAuthorityList;
@@ -86,11 +87,11 @@ public class MyUserDetails implements UserDetails {
         this.enabled = enabled;
     }
 
-    public Double getMoney() {
+    public BigDecimal getMoney() {
         return money;
     }
 
-    public void setMoney(Double money) {
+    public void setMoney(BigDecimal money) {
         this.money = money;
     }
 }

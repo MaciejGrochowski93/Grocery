@@ -9,6 +9,7 @@ import maciej.grochowski.grocerystore.user.UserRepository;
 import maciej.grochowski.grocerystore.user.UserService;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,21 +40,22 @@ public class CartService {
 
     public void buyCartProducts() throws NotEnoughMoneyException {
         User user = userService.getPrincipal();
-        double userMoney = user.getMoney();
-        double cartPrice = getCartProductsPrice();
+        BigDecimal userMoney = user.getMoney();
+        BigDecimal cartPrice = getCartProductsPrice();
 
-        if (userMoney < cartPrice) {
+        if (userMoney.compareTo(cartPrice) == -1) {
             throw new NotEnoughMoneyException();
         }
-        user.setMoney(userMoney - cartPrice);
+
+        user.setMoney(userMoney.subtract(cartPrice));
         userRepository.save(user);
     }
 
-    public double getCartProductsPrice() {
+    public BigDecimal getCartProductsPrice() {
         List<Product> allCartProducts = getAllCartProducts();
-        double totalPrice = 0;
-        for (Product p : allCartProducts) {
-            totalPrice += p.getPrice();
+        BigDecimal totalPrice = BigDecimal.ZERO;
+        for (int i = 0; i < allCartProducts.size(); i++) {
+            totalPrice = totalPrice.add(allCartProducts.get(i).getPrice());
         }
         return totalPrice;
     }

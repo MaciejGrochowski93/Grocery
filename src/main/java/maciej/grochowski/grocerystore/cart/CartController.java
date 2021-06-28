@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.math.BigDecimal;
+
 @Controller
 @AllArgsConstructor
 @RequestMapping("/cart")
@@ -27,7 +29,7 @@ public class CartController {
 
     @GetMapping("/cartProductsPrice")
     public String getCartProductsPrice(ModelAndView model) {
-        double totalPrice = cartService.getCartProductsPrice();
+        BigDecimal totalPrice = cartService.getCartProductsPrice();
         model.addObject("totalPrice", totalPrice);
         return "redirect:/cart";
     }
@@ -38,33 +40,29 @@ public class CartController {
         return "redirect:/";
     }
 
-    //    @PostMapping("/add")
-//    public String addUser(@Valid User user, BindingResult result, Model model) {
-//        String err = validationService.validateUser(user);
-//        if (!err.isEmpty()) {
-//            ObjectError error = new ObjectError("globalError", err);
-//            result.addError(error);
-//        }
-//        if (result.hasErrors()) {
-//            return "errors/addUser";
-//        }
-//        repository.save(user);
-//        model.addAttribute("users", repository.findAll());
-//        return "errors/home";
-//    }
-
     @GetMapping("/buyCartProduct")
-    public String buyCartProduct(BindingResult result) {
-        if (result.hasErrors()) {
-            try {
-                cartService.buyCartProducts();
-                cartService.deleteAllCartProducts();
-            } catch (NotEnoughMoneyException e) {
-                return "redirect:/cart";
-            }
+    public String buyCartProduct() {
+        try {
+            cartService.buyCartProducts();
+            cartService.deleteAllCartProducts();
+        } catch (NotEnoughMoneyException e) {
+            return "redirect:/cart";
         }
+
         return "redirect:/cart";
     }
+
+//    @GetMapping("/buyCartProductError")
+//    public String buyCartProductError(Model model) {
+//        try {
+//            cartService.buyCartProducts();
+//            model.addAttribute("buyError", model);
+//        } catch (NotEnoughMoneyException e) {
+//            return "redirect:/error";
+//        }
+//
+//        return "redirect:/error";
+//    }
 
     @GetMapping("/deleteCartProduct/{id}")
     public String deleteCartProduct(@PathVariable Integer id, Product product) {

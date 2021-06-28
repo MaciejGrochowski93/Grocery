@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <div th:replace="fragments/nav :: navbar"></div><div align="center">
+<div th:replace="fragments/nav :: navbar"></div><div align="center">
     <div sec:authorize="!isAnonymous()">
         <div class="right">
             <h5>
@@ -49,18 +49,14 @@
             </td>
         </tr>
         <tr>
-                <td></td><td></td><td></td><td></td><td></td>
-                <td><span>Σ </span><a th:text="${cartProductPrice}"></a></td>
-                <td><a th:href="@{/cart/buyCartProduct}" class="btn btn-primary">Purchase</a> </td>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td><span>Σ </span><a th:text="${cartProductPrice}"></a></td>
+            <td><a th:href="@{/cart/buyCartProduct}" class="btn btn-primary">Purchase</a> </td>
         </tr>
-
-<!--        <p th:if="${buyCartProduct.hasAnyErrors()}" class="error">Not enough money to purchase.</p>-->
-<!--        <div th:if="${#fields.hasAnyErrors()}">-->
-<!--            <p th:each="err : ${#fields.allErrors()}" th:text="${err}">dgdfgdfg</p>-->
-<!--        </div>-->
-
-
         </form>
+
+
+
         </tbody>
     </table>
 </div>
