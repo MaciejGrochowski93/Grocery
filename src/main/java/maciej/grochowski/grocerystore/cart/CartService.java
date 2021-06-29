@@ -1,7 +1,7 @@
 package maciej.grochowski.grocerystore.cart;
 
 import lombok.AllArgsConstructor;
-import maciej.grochowski.grocerystore.exception.NotEnoughMoneyException;
+import maciej.grochowski.grocerystore.error.NotEnoughMoneyException;
 import maciej.grochowski.grocerystore.product.Product;
 import maciej.grochowski.grocerystore.product.ProductRepository;
 import maciej.grochowski.grocerystore.user.User;
@@ -43,12 +43,15 @@ public class CartService {
         BigDecimal userMoney = user.getMoney();
         BigDecimal cartPrice = getCartProductsPrice();
 
-        if (userMoney.compareTo(cartPrice) == -1) {
+        if (userMoney.compareTo(cartPrice) < 0) {
             throw new NotEnoughMoneyException();
+        } else {
+            if (cartPrice.compareTo(BigDecimal.ZERO) != 0) {
+                user.setMoney(userMoney.subtract(cartPrice));
+                userRepository.save(user);
+                deleteAllCartProducts();
+            }
         }
-
-        user.setMoney(userMoney.subtract(cartPrice));
-        userRepository.save(user);
     }
 
     public BigDecimal getCartProductsPrice() {

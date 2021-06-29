@@ -55,10 +55,19 @@
         </tr>
         </form>
 
+<!--        <p th:if="${buyError}" class="error">Not enough error</p>-->
+
+<!--        <div th:with="httpStatus=${T(org.springframework.http.HttpStatus).valueOf(#response.status)}">-->
+<!--            <h1 th:text="|${httpStatus} - ${httpStatus.reasonPhrase}|">404</h1>-->
+<!--                <p th:text="${errorMessage}">Error java.lang.NullPointerException</p>-->
+<!--            <a th:href="@{/}">Back to Home Page</a>-->
+<!--        </div>-->
 
 
         </tbody>
     </table>
+        <p th:if="${errorMessage}" class="error">Not enough money to buy.</p>
+        <p th:unless="${errorMessage}" class="error">Purchase successful.</p>
 </div>
 </body>
 </html>
