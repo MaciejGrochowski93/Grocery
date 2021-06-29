@@ -53,9 +53,11 @@ public class CartController {
             var message = "";
             model.addAttribute("message", message);
         } else {
-            cartService.buyCartProducts();
-            var message = "Purchase complete.";
-            model.addAttribute("message", message);
+            if (cartService.getCartProductsPrice().compareTo(BigDecimal.ZERO) != 0) {
+                cartService.buyCartProducts();
+                var message = "Purchase complete.";
+                model.addAttribute("message", message);
+            }
         }
         return "cart";
     }

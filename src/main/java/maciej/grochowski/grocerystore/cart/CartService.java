@@ -46,11 +46,9 @@ public class CartService {
         if (userMoney.compareTo(cartPrice) < 0) {
             throw new NotEnoughMoneyException();
         } else {
-            if (cartPrice.compareTo(BigDecimal.ZERO) != 0) {
                 user.setMoney(userMoney.subtract(cartPrice));
                 userRepository.save(user);
                 deleteAllCartProducts();
-            }
         }
     }
 
