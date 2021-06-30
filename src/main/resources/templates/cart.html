@@ -31,6 +31,7 @@
             <th>Country</th>
             <th>Expiration</th>
             <th>Price</th>
+            <th>Amount</th>
             <div sec:authorize="!isAnonymous()">
                 <th>Action</th>
             </div>
@@ -44,12 +45,15 @@
             <td th:text="${products.countryProd}">Country</td>
             <td th:text="${products.dateExpiration}">Expiration</td>
             <td th:text="${products.price}">Price</td>
+            <td th:text="${products.amount}">Amount</td>
             <td>
                 <a th:href="@{'/cart/deleteCartProduct/' + ${products.id}}" class="btn btn-danger">Remove</a>
+                <a th:href="@{'/cart/oneMoreProduct/' + ${products.id}}" class="btn btn-success">+</a>
+                <a th:href="@{'/cart/oneLessProduct/' + ${products.id}}" class="btn btn-warning">-</a>
             </td>
         </tr>
         <tr>
-                <td></td><td></td><td></td><td></td><td></td>
+                <td></td><td></td><td></td><td></td><td></td><td></td>
                 <td><span>Σ </span><a th:text="${cartProductPrice}"></a></td>
                 <td><a th:href="@{/cart/buyCartProduct}" class="btn btn-primary">Purchase</a> </td>
         </tr>

@@ -18,7 +18,9 @@
                     <span>Current balance: </span>
                     <span sec:authentication="principal.money"></span><span> PLN</span>
                     <br>
-                    <span><a href="/cart">Check my cart</a></span>
+                    <span>
+                        <a href="/cart">Check my cart <span th:text="${cartProductAmount}"></span></a>
+                    </span>
                 </h5>
             </div>
         </div>
@@ -34,9 +36,9 @@
                 <th>Country</th>
                 <th>Expiration</th>
                 <th>Price</th>
-                <div sec:authorize="!isAnonymous()">
-                    <th>Action</th>
-                </div>
+<!--                <div sec:authorize="!isAnonymous()">-->
+                <th>Action</th>
+<!--                </div>-->
             </tr>
             </thead>
             <tbody>
@@ -47,10 +49,9 @@
                 <td th:text="${products.countryProd}">Country</td>
                 <td th:text="${products.dateExpiration}">Expiration</td>
                 <td th:text="${products.price}">Price</td>
-<!--                <td><a th:href="@{/cart}" class="btn btn-primary">Purchase</a> </td>-->
-                <div sec:authorize="!isAnonymous()">
+<!--                <div sec:authorize="!isAnonymous()">-->
                 <td><a th:href="@{'/cart/addCartProduct/' + ${products.id}}" class="btn btn-primary">Purchase</a> </td>
-                </div>
+<!--                </div>-->
             </tr>
             </tbody>
         </table>

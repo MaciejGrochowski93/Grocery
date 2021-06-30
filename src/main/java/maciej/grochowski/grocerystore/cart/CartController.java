@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import maciej.grochowski.grocerystore.error.NotEnoughMoneyException;
 import maciej.grochowski.grocerystore.product.Product;
 import maciej.grochowski.grocerystore.user.User;
-import maciej.grochowski.grocerystore.user.UserRepository;
-import maciej.grochowski.grocerystore.user.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.math.BigDecimal;
-import java.security.Principal;
 
 @Controller
 @AllArgsConstructor
@@ -24,8 +21,6 @@ import java.security.Principal;
 public class CartController {
 
     private final CartService cartService;
-    private final UserService userService;
-    private final UserRepository userRepository;
 
     @GetMapping()
     public String cartListPage(Model model) {
@@ -49,17 +44,31 @@ public class CartController {
 
     @GetMapping("/buyCartProduct")
     public String buyCartProduct(@ModelAttribute("user") User user, Model model, BindingResult result) throws NotEnoughMoneyException {
+        String message;
         if (result.hasErrors()) {
-            var message = "";
-            model.addAttribute("message", message);
+            message = "";
         } else {
             if (cartService.getCartProductsPrice().compareTo(BigDecimal.ZERO) != 0) {
                 cartService.buyCartProducts();
-                var message = "Purchase complete.";
-                model.addAttribute("message", message);
+                message = "Purchase complete.";
+             } else {
+                message = "Your cart is empty.";
             }
         }
+        model.addAttribute("message", message);
         return "cart";
+    }
+
+    @GetMapping("/oneMoreProduct/{id}")
+    public String oneMoreSameProduct(@PathVariable Integer id, Product product) {
+        cartService.oneMoreSameProduct(product);
+        return "redirect:/cart";
+    }
+
+    @GetMapping("/oneLessProduct/{id}")
+    public String oneLessSameProduct(@PathVariable Integer id, Product product) {
+        cartService.oneLessSameProduct(product);
+        return "redirect:/cart";
     }
 
     @GetMapping("/deleteCartProduct/{id}")

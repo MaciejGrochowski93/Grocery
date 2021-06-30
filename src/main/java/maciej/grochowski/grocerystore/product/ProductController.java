@@ -28,7 +28,7 @@ public class ProductController {
             return "new_product";
         }
         productService.addProduct(product);
-        return "admin";
+        return "redirect:/admin";
     }
 
     @GetMapping("/update/{id}")
