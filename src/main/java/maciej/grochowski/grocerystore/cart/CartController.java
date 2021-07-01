@@ -3,7 +3,9 @@ package maciej.grochowski.grocerystore.cart;
 import lombok.AllArgsConstructor;
 import maciej.grochowski.grocerystore.error.NotEnoughMoneyException;
 import maciej.grochowski.grocerystore.product.Product;
+import maciej.grochowski.grocerystore.user.MyUserDetails;
 import maciej.grochowski.grocerystore.user.User;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -43,19 +45,20 @@ public class CartController {
     }
 
     @GetMapping("/buyCartProduct")
-    public String buyCartProduct(@ModelAttribute("user") User user, Model model, BindingResult result) throws NotEnoughMoneyException {
-        String message;
+    public String buyCartProduct(@ModelAttribute("user") User user, @AuthenticationPrincipal MyUserDetails userDetails,
+                                 Model model, BindingResult result) throws NotEnoughMoneyException {
+        String afterBuyMessage;
         if (result.hasErrors()) {
-            message = "";
+            afterBuyMessage = "";
         } else {
             if (cartService.getCartProductsPrice().compareTo(BigDecimal.ZERO) != 0) {
-                cartService.buyCartProducts();
-                message = "Purchase complete.";
-             } else {
-                message = "Your cart is empty.";
+                cartService.buyCartProducts(userDetails);
+                afterBuyMessage = "Purchase complete.";
+            } else {
+                afterBuyMessage = "Your cart is empty.";
             }
         }
-        model.addAttribute("message", message);
+        model.addAttribute("afterBuyMessage", afterBuyMessage);
         return "cart";
     }
 

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import maciej.grochowski.grocerystore.error.NotEnoughMoneyException;
 import maciej.grochowski.grocerystore.product.Product;
 import maciej.grochowski.grocerystore.product.ProductRepository;
+import maciej.grochowski.grocerystore.user.MyUserDetails;
 import maciej.grochowski.grocerystore.user.User;
 import maciej.grochowski.grocerystore.user.UserRepository;
 import maciej.grochowski.grocerystore.user.UserService;
@@ -22,21 +23,22 @@ public class CartService {
     private final UserRepository userRepository;
     private final ArrayList<Product> cartProducts = new ArrayList<>();
 
-    public ArrayList<Product> getAllCartProducts() {
+    public List<Product> getAllCartProducts() {
         return cartProducts;
     }
 
     public void addCartProduct(Product product) {
-        var p = productRepository.findProductById(product.getId());
-        var newCartProduct = new Product(p.getId(), p.getName(), p.getBrand(),
-                p.getPrice(), BigDecimal.ONE, p.getCategory(),
-                p.getCountryProd(), p.getDateExpiration());
+        var foundProd = productRepository.findProductById(product.getId());
+        var newCartProduct = new Product(foundProd.getId(), foundProd.getName(), foundProd.getBrand(),
+                foundProd.getPrice(), BigDecimal.ONE, foundProd.getCategory(),
+                foundProd.getCountryProd(), foundProd.getDateExpiration());
+
         if (!cartProducts.contains(newCartProduct)) {
             cartProducts.add(newCartProduct);
         }
     }
 
-    public void buyCartProducts() throws NotEnoughMoneyException {
+    public void buyCartProducts(MyUserDetails userDetails) throws NotEnoughMoneyException {
         User user = userService.getPrincipal();
         BigDecimal userMoney = user.getMoney();
         BigDecimal cartPrice = getCartProductsPrice();
@@ -45,6 +47,7 @@ public class CartService {
             throw new NotEnoughMoneyException();
         } else {
             user.setMoney(userMoney.subtract(cartPrice));
+            userDetails.setMoney(user.getMoney());
             userRepository.save(user);
             deleteAllCartProducts();
         }
@@ -72,17 +75,16 @@ public class CartService {
 
     public void oneMoreSameProduct(Product product) {
         cartProducts.stream()
-                .filter(p -> p.getId().equals(product.getId()))
+                .filter(updatedProd -> updatedProd.getId().equals(product.getId()))
                 .findFirst()
-                .ifPresent(p -> p.setAmount(p.getAmount().add(BigDecimal.ONE)));
+                .ifPresent(updatedProd -> updatedProd.setAmount(updatedProd.getAmount().add(BigDecimal.ONE)));
     }
 
     public void oneLessSameProduct(Product product) {
-
         cartProducts.stream()
-                .filter(p -> p.getId().equals(product.getId()) && p.getAmount().compareTo(BigDecimal.ONE) > 0)
+                .filter(updatedProd -> updatedProd.getId().equals(product.getId()) && updatedProd.getAmount().compareTo(BigDecimal.ONE) > 0)
                 .findFirst()
-                .ifPresent(p -> p.setAmount(p.getAmount().subtract(BigDecimal.ONE)));
+                .ifPresent(updatedProd -> updatedProd.setAmount(updatedProd.getAmount().subtract(BigDecimal.ONE)));
     }
 
     public void deleteCartProduct(Product product) {

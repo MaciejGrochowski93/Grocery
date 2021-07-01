@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import maciej.grochowski.grocerystore.registration.email.EmailSender;
 import maciej.grochowski.grocerystore.registration.token.ConfirmationToken;
 import maciej.grochowski.grocerystore.registration.token.ConfirmationTokenService;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,7 +22,6 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ConfirmationTokenService confirmationTokenService;
-    private final EmailSender emailSender;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

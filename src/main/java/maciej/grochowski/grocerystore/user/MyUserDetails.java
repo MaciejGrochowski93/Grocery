@@ -18,7 +18,7 @@ public class MyUserDetails implements UserDetails {
     private BigDecimal money = BigDecimal.valueOf(100.00);
     private Boolean enabled;
     private Boolean locked = false;
-    private List<GrantedAuthority> grantedAuthorityList;
+    private final List<GrantedAuthority> grantedAuthorityList;
 
     public MyUserDetails(User user) {
         this.email = user.getEmail();
