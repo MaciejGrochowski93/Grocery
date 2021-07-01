@@ -10,6 +10,8 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -50,9 +52,9 @@ public class Product {
     private String countryProd;
 
     @Column(name = "date_expiration")
-    private Date dateExpiration;
+    private LocalDate dateExpiration;
 
-    public Product(Integer id, String name, String brand, BigDecimal price, String category, String countryProd, Date dateExpiration) {
+    public Product(Integer id, String name, String brand, BigDecimal price, String category, String countryProd, LocalDate dateExpiration) {
         this.id = id;
         this.name = name;
         this.brand = brand;
