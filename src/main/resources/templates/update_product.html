@@ -20,7 +20,7 @@
 
             <input type="text" th:field="*{brand}" placeholder="Product's brand" class="form-control mb-4 col-4"/>
 
-            <input type="number" th:field="*{price}" placeholder="Product's price" class="form-control mb-4 col-4"/>
+            <input type="number" th:field="*{price}" placeholder="Product's price" class="form-control mb-4 col-4" step="0.01"/>
 
             <input type="text" th:field="*{category}" placeholder="Product's category" class="form-control mb-4 col-4"/>
             <div th:fragment="validation-error">

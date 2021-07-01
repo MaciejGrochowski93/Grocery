@@ -69,7 +69,9 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return name.equals(product.name) && Objects.equals(brand, product.brand) && price.equals(product.price) && category.equals(product.category) && Objects.equals(countryProd, product.countryProd) && Objects.equals(dateExpiration, product.dateExpiration);
+        return name.equals(product.name) && Objects.equals(brand, product.brand)
+                && price.equals(product.price) && category.equals(product.category)
+                && Objects.equals(countryProd, product.countryProd) && Objects.equals(dateExpiration, product.dateExpiration);
     }
 
     @Override
@@ -78,6 +80,6 @@ public class Product {
     }
 
     public void setPrice(BigDecimal price) {
-        this.price = new BigDecimal(String.valueOf(price));
+        this.price = price;
     }
 }

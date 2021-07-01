@@ -26,7 +26,7 @@ public class ProductService {
         productRepository
                 .findAll()
                 .stream()
-                .filter(p -> p.getName().toLowerCase().contains(name.toLowerCase()))
+                .filter(product -> product.getName().toLowerCase().contains(name.toLowerCase()))
                 .forEach(products::add);
         return products;
     }
@@ -36,7 +36,7 @@ public class ProductService {
         productRepository
                 .findAll()
                 .stream()
-                .filter(e -> e.getCategory().equalsIgnoreCase(category))
+                .filter(product -> product.getCategory().equalsIgnoreCase(category))
                 .forEach(products::add);
         return products;
     }
