@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -23,14 +22,8 @@ public class CartService {
     private final UserRepository userRepository;
     private final ArrayList<Product> cartProducts = new ArrayList<>();
 
-    public List<Product> getAllCartProducts() {
+    public ArrayList<Product> getAllCartProducts() {
         return cartProducts;
-    }
-
-    public Optional<Product> getOneProduct(int id) {
-        return cartProducts.stream()
-                .filter(p -> p.getId() == (id))
-                .findAny();
     }
 
     public void addCartProduct(Product product) {
@@ -68,6 +61,7 @@ public class CartService {
     public BigDecimal getCartProductsPrice() {
         List<Product> allCartProducts = getAllCartProducts();
         BigDecimal totalPrice = BigDecimal.ZERO;
+
         for (int i = 0; i < allCartProducts.size(); i++) {
             totalPrice = totalPrice.add(
                     allCartProducts.get(i).getPrice()
@@ -77,21 +71,18 @@ public class CartService {
     }
 
     public void oneMoreSameProduct(Product product) {
-        var editedProduct = cartProducts.get(product.getId() - 1);
-        editedProduct.setAmount(editedProduct.getAmount().add(BigDecimal.ONE));
-            getOneProduct(product.getId());
-
-        cartProducts.set(editedProduct.getId() - 1, editedProduct);
+        cartProducts.stream()
+                .filter(p -> p.getId().equals(product.getId()))
+                .findFirst()
+                .ifPresent(p -> p.setAmount(p.getAmount().add(BigDecimal.ONE)));
     }
 
     public void oneLessSameProduct(Product product) {
-        var editedProduct = cartProducts.get(product.getId() - 1);
-        var currentAmount = editedProduct.getAmount();
 
-        if (currentAmount.compareTo(BigDecimal.ONE) > 0) {
-            editedProduct.setAmount(currentAmount.subtract(BigDecimal.ONE));
-            cartProducts.set(product.getId() - 1, editedProduct);
-        }
+        cartProducts.stream()
+                .filter(p -> p.getId().equals(product.getId()) && p.getAmount().compareTo(BigDecimal.ONE) > 0)
+                .findFirst()
+                .ifPresent(p -> p.setAmount(p.getAmount().subtract(BigDecimal.ONE)));
     }
 
     public void deleteCartProduct(Product product) {
