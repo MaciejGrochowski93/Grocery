@@ -65,10 +65,10 @@ public class CartService {
         List<Product> allCartProducts = getAllCartProducts();
         BigDecimal totalPrice = BigDecimal.ZERO;
 
-        for (int i = 0; i < allCartProducts.size(); i++) {
+        for (Product particularProduct : allCartProducts) {
             totalPrice = totalPrice.add(
-                    allCartProducts.get(i).getPrice()
-                            .multiply(allCartProducts.get(i).getAmount()));
+                    particularProduct.getPrice()
+                            .multiply(particularProduct.getAmount()));
         }
         return totalPrice;
     }

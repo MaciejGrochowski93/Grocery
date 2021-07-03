@@ -26,26 +26,23 @@ public class Product {
     @Column(name = "id")
     private Integer id;
 
-    @NotNull
     @Length(min = 1, max = 50, message = "Product's name must consist of 1 to 50 letters.")
-    @Column(name = "name", unique = true)
+    @Column(name = "name", unique = true, nullable = false)
     private String name;
 
     @Column(name = "brand")
     private String brand;
 
-    @Column(name = "price", nullable = false)
     @DecimalMin(value = "0.00", message = "Price has to be a non negative number")
+    @Column(name = "price", nullable = false)
     private BigDecimal price;
 
-    @NotNull
-    @Column(name = "amount")
     @DecimalMin(value = "0", message = "Amount has to be a non negative number")
+    @Column(name = "amount", nullable = false)
     private BigDecimal amount = BigDecimal.valueOf(10);
 
-    @NotNull
     @Length(min = 1, max = 50, message = "Your email must consist of 6 to 30 letters.")
-    @Column(name = "category")
+    @Column(name = "category", nullable = false)
     private String category;
 
     @Column(name = "country_prod")

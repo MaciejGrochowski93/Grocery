@@ -8,51 +8,25 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+
     <div th:replace="fragments/nav :: navbar"></div>
+
     <div align="center">
-        <div sec:authorize="!isAnonymous()">
-            <div class="right">
-                <h5>
-                    <br>
-                    <p sec:authentication="principal.username"></p>
-                    <span>Current balance: </span>
-                    <span sec:authentication="principal.money"></span><span> PLN</span>
-                    <br>
-                    <span>
-                        <a href="/cart">Check my cart <span th:text="${cartProductAmount}"></span></a>
-                    </span>
-                </h5>
-            </div>
-        </div>
-        <div sec:authorize="isAnonymous()">
-            <br><br><br>
-        </div>
+
+        <div th:replace="fragments/principalGreeting :: greeting"></div>
+
         <table border="2" class="table table-bordered" style="width: 60%">
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Brand</th>
-                <th>Category</th>
-                <th>Country</th>
-                <th>Expiration</th>
-                <th>Price</th>
-<!--                <div sec:authorize="!isAnonymous()">-->
-                <th>Action</th>
-<!--                </div>-->
-            </tr>
-            </thead>
+            <div th:replace="fragments/thead :: tabhead"></div>
             <tbody>
-            <tr th:each="products : ${productList}">
-                <td th:text="${products.name}">Name</td>
-                <td th:text="${products.brand}">Brand</td>
-                <td th:text="${products.category}">Category</td>
-                <td th:text="${products.countryProd}">Country</td>
-                <td th:text="${products.dateExpiration}">Expiration</td>
-                <td th:text="${products.price}">Price</td>
-<!--                <div sec:authorize="!isAnonymous()">-->
-                <td><a th:href="@{'/cart/addCartProduct/' + ${products.id}}" class="btn btn-primary">Purchase</a> </td>
-<!--                </div>-->
-            </tr>
+                <tr th:each="products : ${productList}">
+                    <td th:text="${products.name}">Name</td>
+                    <td th:text="${products.brand}">Brand</td>
+                    <td th:text="${products.category}">Category</td>
+                    <td th:text="${products.countryProd}">Country</td>
+                    <td th:text="${products.dateExpiration}">Expiration</td>
+                    <td th:text="${products.price}">Price</td>
+                    <td><a th:href="@{'/cart/addCartProduct/' + ${products.id}}" class="btn btn-primary">Purchase</a> </td>
+                </tr>
             </tbody>
         </table>
     </div>

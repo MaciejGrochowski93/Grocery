@@ -24,43 +24,43 @@
 
     <table border="2" class="table table-bordered" style="width: 60%">
         <thead>
-        <tr>
-            <th>Name</th>
-            <th>Brand</th>
-            <th>Category</th>
-            <th>Country</th>
-            <th>Expiration</th>
-            <th>Price</th>
-            <th>Amount</th>
-            <div sec:authorize="!isAnonymous()">
-                <th>Action</th>
-            </div>
-        </tr>
+            <tr>
+                <th>Name</th>
+                <th>Brand</th>
+                <th>Category</th>
+                <th>Country</th>
+                <th>Expiration</th>
+                <th>Amount</th>
+                <th>Price</th>
+                <div sec:authorize="!isAnonymous()">
+                    <th>Action</th>
+                </div>
+            </tr>
         </thead>
         <tbody>
-        <tr th:each="products : ${cartProductList}">
-            <td th:text="${products.name}">Name</td>
-            <td th:text="${products.brand}">Brand</td>
-            <td th:text="${products.category}">Category</td>
-            <td th:text="${products.countryProd}">Country</td>
-            <td th:text="${products.dateExpiration}">Expiration</td>
-            <td th:text="${products.price}">Price</td>
-            <td th:text="${products.amount}">Amount</td>
-            <td>
-                <a th:href="@{'/cart/deleteCartProduct/' + ${products.id}}" class="btn btn-danger">Remove</a>
-                <a th:href="@{'/cart/oneMoreProduct/' + ${products.id}}" class="btn btn-success">+</a>
-                <a th:href="@{'/cart/oneLessProduct/' + ${products.id}}" class="btn btn-warning">-</a>
-            </td>
-        </tr>
-        <tr>
-                <td></td><td></td><td></td><td></td><td></td><td></td>
-                <td><span>Σ </span><a th:text="${cartProductPrice}"></a></td>
-                <td><a th:href="@{/cart/buyCartProduct}" class="btn btn-primary">Purchase</a> </td>
-        </tr>
+            <tr th:each="products : ${cartProductList}">
+                <td th:text="${products.name}">Name</td>
+                <td th:text="${products.brand}">Brand</td>
+                <td th:text="${products.category}">Category</td>
+                <td th:text="${products.countryProd}">Country</td>
+                <td th:text="${products.dateExpiration}">Expiration date</td>
+                <td th:text="${products.amount}">Amount</td>
+                <td th:text="${products.price}">Price</td>
+                <td>
+                    <a th:href="@{'/cart/deleteCartProduct/' + ${products.id}}" class="btn btn-danger">Remove</a>
+                    <a th:href="@{'/cart/oneMoreProduct/' + ${products.id}}" class="btn btn-success">+</a>
+                    <a th:href="@{'/cart/oneLessProduct/' + ${products.id}}" class="btn btn-warning">-</a>
+                </td>
+            </tr>
+            <tr>
+                    <td></td><td></td><td></td><td></td><td></td><td></td>
+                    <td><span>Σ </span><a th:text="${cartProductPrice}"></a></td>
+                    <td><a th:href="@{/cart/buyCartProduct}" class="btn btn-primary">Purchase</a> </td>
+            </tr>
         </form>
         </tbody>
     </table>
-        <p th:text="${errorMessage}"></p>
+        <p th:text="${noMoneyErrorMsg}"></p>
         <p th:text="${afterBuyMessage}"></p>
 </div>
 </body>

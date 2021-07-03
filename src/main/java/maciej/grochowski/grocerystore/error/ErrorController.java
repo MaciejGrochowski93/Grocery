@@ -18,9 +18,7 @@ public class ErrorController {
     public String exception(final Throwable throwable, final Model model) {
         logger.error("Exception during execution of shopping application", throwable);
         String errorMessage = (throwable != null ? throwable.getMessage() : "You don't have enough money to pay for the products.");
-        model.addAttribute("errorMessage", errorMessage);
-//        String returnToCart = "<p><a th:href=\"/\">Return to homepage</a></p>";
-//        model.addAttribute("returnToCart", returnToCart);
+        model.addAttribute("noMoneyErrorMsg", errorMessage);
         return "cart";
     }
 }
