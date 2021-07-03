@@ -1,6 +1,8 @@
-package maciej.grochowski.grocerystore.product;
+package maciej.grochowski.grocerystore.controller;
 
 import lombok.AllArgsConstructor;
+import maciej.grochowski.grocerystore.model.Product;
+import maciej.grochowski.grocerystore.service.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

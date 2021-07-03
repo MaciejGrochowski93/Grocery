@@ -1,16 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>Maciej's Grocery</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="/css/style.css">
+    <div th:replace="fragments/head :: headPart"></div>
 </head>
+
 <body>
-
     <div th:replace="fragments/nav :: navbar"></div>
-
     <div align="center">
 
         <div th:replace="fragments/principalGreeting :: greeting"></div>

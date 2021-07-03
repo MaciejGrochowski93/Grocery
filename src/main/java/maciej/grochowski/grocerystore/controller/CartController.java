@@ -1,10 +1,11 @@
-package maciej.grochowski.grocerystore.cart;
+package maciej.grochowski.grocerystore.controller;
 
 import lombok.AllArgsConstructor;
+import maciej.grochowski.grocerystore.service.CartService;
 import maciej.grochowski.grocerystore.error.NotEnoughMoneyException;
-import maciej.grochowski.grocerystore.product.Product;
-import maciej.grochowski.grocerystore.user.MyUserDetails;
-import maciej.grochowski.grocerystore.user.User;
+import maciej.grochowski.grocerystore.model.Product;
+import maciej.grochowski.grocerystore.security.MyUserDetails;
+import maciej.grochowski.grocerystore.model.User;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
+import java.util.Optional;
 
 @Controller
 @AllArgsConstructor
@@ -23,6 +26,10 @@ import java.math.BigDecimal;
 public class CartController {
 
     private final CartService cartService;
+
+    protected Optional<String> getPreviousPageByRequest(HttpServletRequest request) {
+        return Optional.ofNullable(request.getHeader("Referer")).map(requestUrl -> "redirect:" + requestUrl);
+    }
 
     @GetMapping()
     public String cartListPage(Model model) {
@@ -39,9 +46,9 @@ public class CartController {
     }
 
     @GetMapping("/addCartProduct/{id}")
-    public String addCartProductForm(@PathVariable Integer id, Product product) {
+    public String addCartProductForm(@PathVariable Integer id, Product product, HttpServletRequest request) {
         cartService.addCartProduct(product);
-        return "redirect:/";
+        return getPreviousPageByRequest(request).orElse("/");
     }
 
     @GetMapping("/buyCartProduct")

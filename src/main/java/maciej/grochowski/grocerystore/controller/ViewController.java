@@ -1,8 +1,8 @@
-package maciej.grochowski.grocerystore;
+package maciej.grochowski.grocerystore.controller;
 
 import lombok.AllArgsConstructor;
-import maciej.grochowski.grocerystore.cart.CartService;
-import maciej.grochowski.grocerystore.product.ProductService;
+import maciej.grochowski.grocerystore.service.CartService;
+import maciej.grochowski.grocerystore.service.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +19,7 @@ public class ViewController {
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("productList", productService.getAllProducts());
-        model.addAttribute("cartProductAmount", cartService.getCartProductsAmount());
+        model.addAttribute("cartProductAmount", cartService.getProductsInCartAmount());
         return "index";
     }
 

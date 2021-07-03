@@ -1,5 +1,6 @@
-package maciej.grochowski.grocerystore.user;
+package maciej.grochowski.grocerystore.repository;
 
+import maciej.grochowski.grocerystore.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

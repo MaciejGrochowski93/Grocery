@@ -1,4 +1,4 @@
-package maciej.grochowski.grocerystore.registration.email;
+package maciej.grochowski.grocerystore.email;
 
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;

@@ -1,17 +1,15 @@
-package maciej.grochowski.grocerystore.registration;
+package maciej.grochowski.grocerystore.service;
 
-import com.sun.mail.smtp.SMTPAddressFailedException;
 import lombok.AllArgsConstructor;
-import maciej.grochowski.grocerystore.registration.email.EmailSender;
-import maciej.grochowski.grocerystore.registration.token.ConfirmationToken;
-import maciej.grochowski.grocerystore.registration.token.ConfirmationTokenService;
-import maciej.grochowski.grocerystore.user.User;
-import maciej.grochowski.grocerystore.user.UserService;
+import maciej.grochowski.grocerystore.model.RegistrationRequest;
+import maciej.grochowski.grocerystore.email.EmailValidator;
+import maciej.grochowski.grocerystore.email.EmailSender;
+import maciej.grochowski.grocerystore.model.ConfirmationToken;
+import maciej.grochowski.grocerystore.model.User;
 import org.springframework.mail.MailSendException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.mail.SendFailedException;
 import java.time.LocalDateTime;
 
 @Service

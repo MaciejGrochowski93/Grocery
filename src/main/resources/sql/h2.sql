@@ -20,14 +20,14 @@ VALUES
 INSERT INTO products (name, category, country_prod, amount, price)
 VALUES
 ('Wheat bread', 'Breadstuff', 'Poland', 1, 2.99),
-('Rye bread', 'Poland', 'Breadstuff', 1, 3.79),
-('Kaiser roll', 'Poland', 'Breadstuff', 1, 0.59),
-('Bun', 'Poland', 'Breadstuff', 1, 0.49),
+('Rye bread', 'Breadstuff', 'Poland', 1, 3.79),
+('Kaiser roll', 'Breadstuff', 'Poland', 1, 0.59),
+('Bun', 'Breadstuff', 'Poland', 1, 0.49),
 
-('Tomatoes 1 kg', 'Italy', 'Vegetables', 1, 5.99),
-('Spinach 1 kg', 'Italy', 'Vegetables', 1, 4.49),
-('Carrots 1 kg', 'UK', 'Vegetables', 1, 2.49),
-('Potatoes 1 kg', 'France', 'Vegetables', 1, 1.99);
+('Tomatoes 1 kg', 'Vegetables', 'Italy', 1, 5.99),
+('Spinach 1 kg', 'Vegetables', 'Italy', 1, 4.49),
+('Carrots 1 kg', 'Vegetables', 'UK', 1, 2.49),
+('Potatoes 1 kg', 'Vegetables', 'France', 1, 1.99);
 
 
 INSERT INTO products (name, brand, category, country_prod, amount, price)

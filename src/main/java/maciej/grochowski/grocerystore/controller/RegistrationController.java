@@ -1,6 +1,8 @@
-package maciej.grochowski.grocerystore.registration;
+package maciej.grochowski.grocerystore.controller;
 
 import lombok.AllArgsConstructor;
+import maciej.grochowski.grocerystore.model.RegistrationRequest;
+import maciej.grochowski.grocerystore.service.RegistrationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;

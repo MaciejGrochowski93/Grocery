@@ -1,6 +1,8 @@
-package maciej.grochowski.grocerystore.registration.token;
+package maciej.grochowski.grocerystore.service;
 
 import lombok.AllArgsConstructor;
+import maciej.grochowski.grocerystore.model.ConfirmationToken;
+import maciej.grochowski.grocerystore.repository.ConfirmationTokenRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;

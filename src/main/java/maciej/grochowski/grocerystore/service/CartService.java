@@ -1,13 +1,12 @@
-package maciej.grochowski.grocerystore.cart;
+package maciej.grochowski.grocerystore.service;
 
 import lombok.AllArgsConstructor;
 import maciej.grochowski.grocerystore.error.NotEnoughMoneyException;
-import maciej.grochowski.grocerystore.product.Product;
-import maciej.grochowski.grocerystore.product.ProductRepository;
-import maciej.grochowski.grocerystore.user.MyUserDetails;
-import maciej.grochowski.grocerystore.user.User;
-import maciej.grochowski.grocerystore.user.UserRepository;
-import maciej.grochowski.grocerystore.user.UserService;
+import maciej.grochowski.grocerystore.model.Product;
+import maciej.grochowski.grocerystore.repository.ProductRepository;
+import maciej.grochowski.grocerystore.security.MyUserDetails;
+import maciej.grochowski.grocerystore.model.User;
+import maciej.grochowski.grocerystore.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -53,7 +52,7 @@ public class CartService {
         }
     }
 
-    public String getCartProductsAmount() {
+    public String getProductsInCartAmount() {
         if (cartProducts.isEmpty()) {
             return "";
         } else {

@@ -1,5 +1,6 @@
-package maciej.grochowski.grocerystore.registration.token;
+package maciej.grochowski.grocerystore.repository;
 
+import maciej.grochowski.grocerystore.model.ConfirmationToken;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

@@ -1,9 +1,9 @@
-package maciej.grochowski.grocerystore.registration.token;
+package maciej.grochowski.grocerystore.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import maciej.grochowski.grocerystore.user.User;
+import maciej.grochowski.grocerystore.model.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

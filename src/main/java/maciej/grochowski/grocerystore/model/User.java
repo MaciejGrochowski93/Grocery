@@ -1,4 +1,4 @@
-package maciej.grochowski.grocerystore.user;
+package maciej.grochowski.grocerystore.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

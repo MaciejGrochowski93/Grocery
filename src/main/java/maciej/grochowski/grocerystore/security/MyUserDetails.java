@@ -1,5 +1,6 @@
-package maciej.grochowski.grocerystore.user;
+package maciej.grochowski.grocerystore.security;
 
+import maciej.grochowski.grocerystore.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

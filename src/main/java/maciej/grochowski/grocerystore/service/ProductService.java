@@ -1,6 +1,8 @@
-package maciej.grochowski.grocerystore.product;
+package maciej.grochowski.grocerystore.service;
 
 import lombok.AllArgsConstructor;
+import maciej.grochowski.grocerystore.model.Product;
+import maciej.grochowski.grocerystore.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

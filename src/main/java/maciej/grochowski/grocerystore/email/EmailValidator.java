@@ -1,4 +1,4 @@
-package maciej.grochowski.grocerystore.registration;
+package maciej.grochowski.grocerystore.email;
 
 import org.springframework.stereotype.Service;
 
