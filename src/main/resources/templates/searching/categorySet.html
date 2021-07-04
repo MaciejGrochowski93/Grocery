@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <div th:replace="fragments/head :: headPart"></div>
+</head>
+
+<body>
+<div th:replace="fragments/nav :: navbar"></div>
+<div align="center">
+
+    <div th:replace="fragments/principalGreeting :: greeting"></div>
+
+            <br>
+            <h2>Find your products by category:</h2>
+            <br>
+            <tr th:each="categories : ${categorySet}">
+                <a th:href="@{'/category/' + ${categories}}">
+                    <li th:text="${categories}"></li>
+                    <br>
+                </a>
+            </tr>
+
+</div>
+</body>
+</html>

@@ -27,13 +27,13 @@ public class CartController {
 
     private final CartService cartService;
 
-    protected Optional<String> getPreviousPageByRequest(HttpServletRequest request) {
+    private Optional<String> getPreviousPageByRequest(HttpServletRequest request) {
         return Optional.ofNullable(request.getHeader("Referer")).map(requestUrl -> "redirect:" + requestUrl);
     }
 
     @GetMapping()
     public String cartListPage(Model model) {
-        model.addAttribute("cartProductList", cartService.getAllCartProducts());
+        model.addAttribute("cartProductSet", cartService.getAllCartProducts());
         model.addAttribute("cartProductPrice", cartService.getCartProductsPrice());
         return "cart";
     }

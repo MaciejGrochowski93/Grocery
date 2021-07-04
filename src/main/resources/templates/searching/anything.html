@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <div th:replace="fragments/head :: headPart"></div>
+</head>
+
+<body>
+<div th:replace="fragments/nav :: navbar"></div>
+<div align="center">
+
+    <div th:replace="fragments/principalGreeting :: greeting"></div>
+
+    <table border="2" class="table table-bordered" style="width: 60%">
+        <div th:replace="fragments/thead :: tabhead"></div>
+        <tbody>
+        <tr th:each="products : ${productsSetByAnything}">
+            <td th:text="${products.name}">Name</td>
+            <td th:text="${products.brand}">Brand</td>
+            <td th:text="${products.category}">Category</td>
+            <td th:text="${products.countryProd}">Country</td>
+            <td th:text="${products.dateExpiration}">Expiration</td>
+            <td th:text="${products.price}">Price</td>
+            <td><a th:href="@{'/cart/addCartProduct/' + ${products.id}}" class="btn btn-primary">Purchase</a> </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>

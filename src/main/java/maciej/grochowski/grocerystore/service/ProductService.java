@@ -5,9 +5,8 @@ import maciej.grochowski.grocerystore.model.Product;
 import maciej.grochowski.grocerystore.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -15,32 +14,66 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
+    public Set<Product> getAllProducts() {
+        return new HashSet<>(productRepository.findAll());
     }
 
     public Optional<Product> findProductById(Integer id) {
         return productRepository.findById(id);
     }
 
-    public List<Product> getProdByName(String name) {
-        ArrayList<Product> products = new ArrayList<>();
-        productRepository
+    public Set<Product> getProdByAnything(String anything) {
+        return productRepository
                 .findAll()
                 .stream()
-                .filter(product -> product.getName().toLowerCase().contains(name.toLowerCase()))
-                .forEach(products::add);
-        return products;
+                .filter(product -> product.toString().toLowerCase().contains(anything.toLowerCase()))
+                .collect(Collectors.toSet());
     }
 
-    public List<Product> getProdByCategory(String category) {
-        ArrayList<Product> products = new ArrayList<>();
-        productRepository
+    public Set<String> getCategorySet() {
+        return getAllProducts()
+                .stream()
+                .map(Product::getCategory)
+                .collect(Collectors.toSet());
+    }
+
+    public Set<Product> getProductsByCategory(String category) {
+        return productRepository
                 .findAll()
                 .stream()
                 .filter(product -> product.getCategory().equalsIgnoreCase(category))
-                .forEach(products::add);
-        return products;
+                .collect(Collectors.toSet());
+    }
+
+    public Set<String> getBrandSet() {
+        return getAllProducts()
+                .stream()
+                .filter(product -> product.getBrand() != null)
+                .map(Product::getBrand)
+                .collect(Collectors.toSet());
+    }
+
+    public Set<Product> getProductsByBrand(String brand) {
+        return productRepository
+                .findAll()
+                .stream()
+                .filter(product -> product.getBrand() != null && product.getBrand().equals(brand))
+                .collect(Collectors.toSet());
+    }
+
+    public Set<String> getCountrySet() {
+        return getAllProducts()
+                .stream()
+                .map(Product::getCountryProd)
+                .collect(Collectors.toSet());
+    }
+
+    public Set<Product> getProductsByCountry(String country) {
+        return productRepository
+                .findAll()
+                .stream()
+                .filter(product -> product.getCountryProd().equals(country))
+                .collect(Collectors.toSet());
     }
 
     public void addProduct(Product product) {
