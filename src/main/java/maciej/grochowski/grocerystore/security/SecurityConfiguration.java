@@ -38,7 +38,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/register", "/confirm**", "/cart**", "/").permitAll()
+                .antMatchers("/register", "/confirm**", "/cart", "/cart/*/*", "/search*", "/category", "/category/*",
+                        "/brand", "/brand/*", "/country", "/country/*", "/").permitAll()
                 .antMatchers("/buyProduct**").hasRole("USER")
                 .antMatchers("/admin", "/addProduct", "/product**").hasRole("ADMIN")
                 .anyRequest()
@@ -50,7 +51,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/default", true)
                 .and()
                 .logout()
-                .logoutSuccessUrl("/index")
                 .invalidateHttpSession(true)
                 .clearAuthentication(true)
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))

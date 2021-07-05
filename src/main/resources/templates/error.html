@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <div th:replace="fragments/head :: headPart"></div>
+</head>
+
+<body>
+<div th:replace="fragments/nav :: navbar"></div>
+<div align="center">
+
+    <div th:replace="fragments/principalGreeting :: greeting"></div>
+
+    <h2 th:text="${prodNotFoundMsg}"></h2>
+    <h2 th:text="${noMoneyErrorMsg}"></h2>
+    <p><a href="/">Return to homepage</a></p>
+
+</div>
+</body>
+</html>

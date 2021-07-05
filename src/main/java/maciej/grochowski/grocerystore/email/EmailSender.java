@@ -31,6 +31,5 @@ public class EmailSender {
             LOGGER.error("Failed to send email", e);
             throw new IllegalStateException("Failed to send email");
         }
-
     }
 }

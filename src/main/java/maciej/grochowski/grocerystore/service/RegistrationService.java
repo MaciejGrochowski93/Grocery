@@ -1,10 +1,10 @@
 package maciej.grochowski.grocerystore.service;
 
 import lombok.AllArgsConstructor;
-import maciej.grochowski.grocerystore.model.RegistrationRequest;
-import maciej.grochowski.grocerystore.email.EmailValidator;
 import maciej.grochowski.grocerystore.email.EmailSender;
+import maciej.grochowski.grocerystore.email.EmailValidator;
 import maciej.grochowski.grocerystore.model.ConfirmationToken;
+import maciej.grochowski.grocerystore.model.RegistrationRequest;
 import maciej.grochowski.grocerystore.model.User;
 import org.springframework.mail.MailSendException;
 import org.springframework.stereotype.Service;
@@ -36,7 +36,7 @@ public class RegistrationService {
 
         String link = "http://localhost:8080/confirm?token=" + token;
 
-        try{
+        try {
             emailSender.sendMail(request.getEmail(), buildEmail(request.getFirstName(), link));
         } catch (MailSendException e) {
             e.getFailedMessages();

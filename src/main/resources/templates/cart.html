@@ -5,18 +5,23 @@
 </head>
 <body>
     <div th:replace="fragments/nav :: navbar"></div><div align="center">
-    <div sec:authorize="!isAnonymous()">
-        <div class="right">
-            <h5>
+
+    <div class="right">
+        <h5>
+            <div sec:authorize="!isAnonymous()">
                 <br>
                 <p sec:authentication="principal.username"></p>
                 <span>Current balance: </span>
                 <span sec:authentication="principal.money"></span><span> PLN</span>
                 <br>
+            </div>
                 <p><a href="/">Return to homepage</a></p>
-            </h5>
-        </div>
+        </h5>
     </div>
+
+        <div sec:authorize="isAnonymous()">
+            <br><br><br>
+        </div>
 
     <table border="2" class="table table-bordered" style="width: 60%">
         <thead>
@@ -28,13 +33,11 @@
                 <th>Expiration</th>
                 <th>Amount</th>
                 <th>Price</th>
-                <div sec:authorize="!isAnonymous()">
-                    <th>Action</th>
-                </div>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each="products : ${cartProductList}">
+            <tr th:each="products : ${cartProductSet}">
                 <td th:text="${products.name}">Name</td>
                 <td th:text="${products.brand}">Brand</td>
                 <td th:text="${products.category}">Category</td>

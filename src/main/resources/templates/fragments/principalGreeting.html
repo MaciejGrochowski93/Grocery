@@ -1,19 +1,21 @@
 <div th:fragment="greeting" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
-    <div sec:authorize="!isAnonymous()">
-        <div class="right">
-            <h5>
+
+    <div class="right">
+        <h5>
+            <div sec:authorize="!isAnonymous()">
                 <br>
                 <p sec:authentication="principal.username"></p>
                 <span>Current balance: </span>
                 <span sec:authentication="principal.money"></span><span> PLN</span>
                 <br>
-                <span>
-                    <a href="/cart">Check my cart <span th:text="${cartProductAmount}"></span></a>
-                </span>
-            </h5>
-        </div>
+            </div>
+            <div sec:authorize="isAnonymous()">
+                <br><br>
+            </div>
+                <a href="/cart">Check my cart <span th:text="${cartProductAmount}"></span></a>
+        </h5>
     </div>
     <div sec:authorize="isAnonymous()">
-        <br><br><br><br><br>
+        <br><br><br>
     </div>
 </div>

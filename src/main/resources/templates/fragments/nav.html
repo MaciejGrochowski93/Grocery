@@ -2,8 +2,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary" xmlns:sec="http://www.w3.org/1999/xhtml"
          xmlns:th="http://www.w3.org/1999/xhtml">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
                     aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -14,29 +13,25 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/category/candies">Candies</a>
+                        <a class="nav-link" href="/category">Category</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/category/breadstuff">Breadstuff</a>
+                        <a class="nav-link" href="/brand">Brand</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/category/chemicals">Chemicals</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/category/vegetables">Vegetables</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/category/alcohol">Alcohol</a>
+                        <a class="nav-link" href="/country">Country</a>
                     </li>
                     <li>
                         <h3>Maciej's Grocery</h3>
                     </li>
+
                     <li>
-                        <form class="d-flex">
-                            <input class="form-control me-sm-2" type="text" placeholder="Search">
+                        <form th:action="@{search}" class="d-flex">
+                            <input name="productsSetByAnything" class="form-control me-sm-2" type="text" placeholder="Search">
                             <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                         </form>
                     </li>
+
                     <div sec:authorize="isAnonymous()">
                         <li class="nav-item">
                             <a class="nav-link" href="login">Join us</a>

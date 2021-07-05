@@ -5,7 +5,9 @@ import maciej.grochowski.grocerystore.model.Product;
 import maciej.grochowski.grocerystore.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,7 +28,12 @@ public class ProductService {
         return productRepository
                 .findAll()
                 .stream()
-                .filter(product -> product.toString().toLowerCase().contains(anything.toLowerCase()))
+                .filter(product -> product != null && product.getBrand() != null &&
+                        (product.getName().toLowerCase().contains(anything.toLowerCase())
+                                || product.getBrand().toLowerCase().contains(anything.toLowerCase())
+                                || product.getCategory().toLowerCase().contains(anything.toLowerCase())
+                                || product.getCountryProd().toLowerCase().contains(anything.toLowerCase()))
+                )
                 .collect(Collectors.toSet());
     }
 

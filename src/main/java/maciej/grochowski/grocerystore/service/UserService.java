@@ -2,9 +2,9 @@ package maciej.grochowski.grocerystore.service;
 
 import lombok.AllArgsConstructor;
 import maciej.grochowski.grocerystore.model.ConfirmationToken;
-import maciej.grochowski.grocerystore.security.MyUserDetails;
 import maciej.grochowski.grocerystore.model.User;
 import maciej.grochowski.grocerystore.repository.UserRepository;
+import maciej.grochowski.grocerystore.security.MyUserDetails;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

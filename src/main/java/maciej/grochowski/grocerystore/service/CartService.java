@@ -3,10 +3,10 @@ package maciej.grochowski.grocerystore.service;
 import lombok.AllArgsConstructor;
 import maciej.grochowski.grocerystore.error.NotEnoughMoneyException;
 import maciej.grochowski.grocerystore.model.Product;
-import maciej.grochowski.grocerystore.repository.ProductRepository;
-import maciej.grochowski.grocerystore.security.MyUserDetails;
 import maciej.grochowski.grocerystore.model.User;
+import maciej.grochowski.grocerystore.repository.ProductRepository;
 import maciej.grochowski.grocerystore.repository.UserRepository;
+import maciej.grochowski.grocerystore.security.MyUserDetails;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
