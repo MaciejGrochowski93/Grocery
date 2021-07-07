@@ -1,6 +1,7 @@
 package maciej.grochowski.grocerystore.controller;
 
 import lombok.AllArgsConstructor;
+import maciej.grochowski.grocerystore.model.Product;
 import maciej.grochowski.grocerystore.service.CartService;
 import maciej.grochowski.grocerystore.service.ProductService;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 @AllArgsConstructor
@@ -18,9 +23,8 @@ public class ViewController {
 
     @GetMapping("/")
     public String index(Model model) {
-//        Set<Product> allProducts = productService.getAllProducts();
-//        allProducts.stream().sorted(Comparator.comparing(Product::getName)).collect(Collectors.toList());
-        model.addAttribute("productList", productService.getAllProducts());
+        List<Product> allProducts = productService.getAllProducts();
+        model.addAttribute("productList", allProducts);
         model.addAttribute("cartProductAmount", cartService.getProductsInCartAmount());
         return "index";
     }

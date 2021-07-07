@@ -49,7 +49,7 @@ public class ProductController implements WebMvcConfigurer {
 
     @PostMapping("/update/{id}")
     public String updateProduct(@PathVariable Integer id,
-                                @ModelAttribute("productForm2") Product product, BindingResult result) {
+                                @Valid @ModelAttribute("productForm2") Product product, BindingResult result) {
         if (result.hasErrors()) {
             return "update_product";
         } else {

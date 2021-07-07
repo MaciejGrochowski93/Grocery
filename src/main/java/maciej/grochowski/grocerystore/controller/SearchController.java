@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -21,7 +22,7 @@ public class SearchController {
 
     @GetMapping("/category")
     public String getCategorySet(Model model) {
-        Set<String> categorySet = productService.getCategorySet();
+        Set<String> categorySet = productService.getCategoriesSet();
         model.addAttribute("categorySet", categorySet);
         model.addAttribute("cartProductAmount", cartService.getProductsInCartAmount());
         return "searching/categorySet";
@@ -29,7 +30,7 @@ public class SearchController {
 
     @GetMapping("/category/{category}")
     public String getParticularCategory(Model model, @PathVariable String category) {
-        Set<Product> productsSetByCategory = productService.getProductsByCategory(category);
+        List<Product> productsSetByCategory = productService.getProductsByCategory(category);
         model.addAttribute("productsSetByCategory", productsSetByCategory);
         model.addAttribute("cartProductAmount", cartService.getProductsInCartAmount());
         return "searching/categoryParticular";
@@ -37,7 +38,7 @@ public class SearchController {
 
     @GetMapping("/brand")
     public String getBrandSet(Model model) {
-        Set<String> brandSet = productService.getBrandSet();
+        Set<String> brandSet = productService.getBrandsSet();
         model.addAttribute("brandSet", brandSet);
         model.addAttribute("cartProductAmount", cartService.getProductsInCartAmount());
         return "searching/brandSet";
@@ -45,7 +46,7 @@ public class SearchController {
 
     @GetMapping("/brand/{brand}")
     public String getParticularBrand(Model model, @PathVariable String brand) {
-        Set<Product> productsSetByBrand = productService.getProductsByBrand(brand);
+        List<Product> productsSetByBrand = productService.getProductsByBrand(brand);
         model.addAttribute("productsSetByBrand", productsSetByBrand);
         model.addAttribute("cartProductAmount", cartService.getProductsInCartAmount());
         return "searching/brandParticular";
@@ -53,7 +54,7 @@ public class SearchController {
 
     @GetMapping("/country")
     public String getCountrySet(Model model) {
-        Set<String> countrySet = productService.getCountrySet();
+        Set<String> countrySet = productService.getCountriesSet();
         model.addAttribute("countrySet", countrySet);
         model.addAttribute("cartProductAmount", cartService.getProductsInCartAmount());
         return "searching/countrySet";
@@ -61,7 +62,7 @@ public class SearchController {
 
     @GetMapping("/country/{country}")
     public String getParticularCountry(Model model, @PathVariable String country) {
-        Set<Product> productsSetByCountry = productService.getProductsByCountry(country);
+        List<Product> productsSetByCountry = productService.getProductsByCountry(country);
         model.addAttribute("productsSetByCountry", productsSetByCountry);
         model.addAttribute("cartProductAmount", cartService.getProductsInCartAmount());
         return "searching/countryParticular";
@@ -69,9 +70,9 @@ public class SearchController {
 
     @GetMapping("/search")
     public String getProductByAnything(Model model, @RequestParam("productsSetByAnything") String anything) {
-        Set<Product> productsSetByAnything = productService.getProdByAnything(anything);
-        if (!productsSetByAnything.isEmpty()) {
-            model.addAttribute("productsSetByAnything", productsSetByAnything);
+        List<Product> prodByAnything = productService.getProdByAnything(anything);
+        if (!prodByAnything.isEmpty()) {
+            model.addAttribute("productsListByAnything", prodByAnything);
             model.addAttribute("cartProductAmount", cartService.getProductsInCartAmount());
             return "searching/anything";
         } else {

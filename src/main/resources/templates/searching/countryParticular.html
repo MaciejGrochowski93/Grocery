@@ -14,6 +14,11 @@
         <div th:replace="fragments/thead :: tabhead"></div>
         <tbody>
         <tr th:each="products : ${productsSetByCountry}">
+
+            <div class="form-group" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+                <td th:text="${products.id}">Id</td>
+            </div>
+
             <td th:text="${products.name}">Name</td>
             <td th:text="${products.brand}">Brand</td>
             <td th:text="${products.category}">Category</td>

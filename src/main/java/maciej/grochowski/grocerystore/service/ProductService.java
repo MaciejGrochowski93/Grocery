@@ -1,13 +1,14 @@
 package maciej.grochowski.grocerystore.service;
 
 import lombok.AllArgsConstructor;
-//import maciej.grochowski.grocerystore.error.IncorrectProductData;
-import maciej.grochowski.grocerystore.error.IncorrectProductData;
 import maciej.grochowski.grocerystore.model.Product;
 import maciej.grochowski.grocerystore.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -16,44 +17,49 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
-    public Set<Product> getAllProducts() {
+//    public Set<Product> getAllProducts() {
+//        List<Product> productList = productRepository.findAll();
+//        productList.sort(Comparator.comparing(Product::getId));
+//        return new LinkedHashSet<>(productList);
+//    }
+
+    public List<Product> getAllProducts() {
         List<Product> productList = productRepository.findAll();
-        productList.sort(Comparator.comparing(Product::getId));
-        return new HashSet<>(productList);
+        return new LinkedList(productList);
     }
 
     public Optional<Product> findProductById(Integer id) {
         return productRepository.findById(id);
     }
 
-    public Set<Product> getProdByAnything(String anything) {
-        return productRepository
-                .findAll()
+    public List<Product> getProdByAnything(String anything) {
+        return getAllProducts()
                 .stream()
-                .filter(product -> product != null && product.getBrand() != null &&
-                        (product.getName().toLowerCase().contains(anything.toLowerCase())
-                                || product.getBrand().toLowerCase().contains(anything.toLowerCase())
-                                || product.getCategory().toLowerCase().contains(anything.toLowerCase())
-                                || product.getCountryProd().toLowerCase().contains(anything.toLowerCase()))
-                )
-                .collect(Collectors.toSet());
+                .filter(product -> product != null &&
+                        (
+                               product.getName().toLowerCase().contains(anything.toLowerCase())
+                            || product.getCategory().toLowerCase().contains(anything.toLowerCase())
+                            || product.getCountryProd().toLowerCase().contains(anything.toLowerCase()))
+                            || (product.getBrand() != null && product.getBrand().toLowerCase().contains(anything.toLowerCase()))
+                        )
+                .collect(Collectors.toList());
     }
 
-    public Set<String> getCategorySet() {
+    public Set<String> getCategoriesSet() {
         return getAllProducts()
                 .stream()
                 .map(Product::getCategory)
                 .collect(Collectors.toSet());
     }
 
-    public Set<Product> getProductsByCategory(String category) {
+    public List<Product> getProductsByCategory(String category) {
         return getAllProducts()
                 .stream()
                 .filter(product -> product.getCategory().equalsIgnoreCase(category))
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
-    public Set<String> getBrandSet() {
+    public Set<String> getBrandsSet() {
         return getAllProducts()
                 .stream()
                 .filter(product -> product.getBrand() != null)
@@ -61,25 +67,25 @@ public class ProductService {
                 .collect(Collectors.toSet());
     }
 
-    public Set<Product> getProductsByBrand(String brand) {
+    public List<Product> getProductsByBrand(String brand) {
         return getAllProducts()
                 .stream()
                 .filter(product -> product.getBrand() != null && product.getBrand().equals(brand))
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
-    public Set<String> getCountrySet() {
+    public Set<String> getCountriesSet() {
         return getAllProducts()
                 .stream()
                 .map(Product::getCountryProd)
                 .collect(Collectors.toSet());
     }
 
-    public Set<Product> getProductsByCountry(String country) {
+    public List<Product> getProductsByCountry(String country) {
         return getAllProducts()
                 .stream()
                 .filter(product -> product.getCountryProd().equals(country))
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     public void addProduct(Product product) {
@@ -87,11 +93,9 @@ public class ProductService {
     }
 
     public void updateProduct(Integer id, Product product) {
-        if (
-                product.getName() != null && product.getCategory() != null &&
-                product.getPrice() != null) {
-            productRepository.save(product);
-        } else throw new IncorrectProductData();
+
+        productRepository.save(product);
+
     }
 
     public void deleteProduct(Integer id) {
