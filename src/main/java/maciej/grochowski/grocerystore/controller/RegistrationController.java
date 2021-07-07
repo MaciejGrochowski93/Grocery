@@ -40,7 +40,7 @@ public class RegistrationController {
         } catch (IllegalStateException e) {
             LOGGER.error(e.getMessage());
         }
-        return "index";
+        return "redirect:/";
     }
 
     @GetMapping("/confirm")

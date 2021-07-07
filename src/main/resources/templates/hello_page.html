@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <div th:replace="fragments/head :: headPart"></div>
+</head>
+
+<body>
+    <div th:replace="fragments/nav :: navbar"></div>
+    <div align="center">
+        <br><br><br><br><br>
+
+        <h2>Welcome, <span sec:authentication="principal.username"></span></h2>
+
+        <p><a href="/">Go to the homepage</a></p>
+    </div>
+</body>
+
+</html>

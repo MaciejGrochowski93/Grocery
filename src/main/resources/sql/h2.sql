@@ -13,7 +13,7 @@ VALUES
 ('Bueno', 'Kinder', 'Candies', 'UK', '2022-01-11', 1, 2.79),
 
 ('Super Color 5 kg', 'Persil', 'Chemicals', 'Germany', '2026-02-17', 1, 39.99),
-('Super White 7 kg', 'Bonux', 'Chemicals', 'Germany', '2027-07-12', 1, 59.99),
+('Super White 7 kg', 'Vanish', 'Chemicals', 'Germany', '2027-07-12', 1, 59.99),
 ('Super Black 10 kg', 'Vanish', 'Chemicals', 'France', '2025-05-10', 1, 69.99);
 
 

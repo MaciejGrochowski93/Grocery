@@ -20,7 +20,19 @@
             <td th:text="${products.countryProd}">Country</td>
             <td th:text="${products.dateExpiration}">Expiration</td>
             <td th:text="${products.price}">Price</td>
-            <td><a th:href="@{'/cart/addCartProduct/' + ${products.id}}" class="btn btn-primary">Purchase</a> </td>
+
+
+            <div class="form-group" th:if="${#authorization.expression('!hasRole(''ADMIN'')')}">
+                <td><a th:href="@{'/cart/addCartProduct/' + ${products.id}}" class="btn btn-primary">Purchase</a> </td>
+            </div>
+
+            <div class="form-group" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+                <td>
+                    <a th:href="@{'/product/update/' + ${products.id}}" class="btn btn-primary">Update</a>
+                    <a th:href="@{'/product/delete/' + ${products.id}}" class="btn btn-danger">Delete</a>
+                </td>
+            </div>
+
         </tr>
         </tbody>
     </table>

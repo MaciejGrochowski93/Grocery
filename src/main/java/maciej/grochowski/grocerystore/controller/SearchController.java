@@ -70,16 +70,15 @@ public class SearchController {
     @GetMapping("/search")
     public String getProductByAnything(Model model, @RequestParam("productsSetByAnything") String anything) {
         Set<Product> productsSetByAnything = productService.getProdByAnything(anything);
-        var prodNotFoundMsg = "";
         if (!productsSetByAnything.isEmpty()) {
             model.addAttribute("productsSetByAnything", productsSetByAnything);
             model.addAttribute("cartProductAmount", cartService.getProductsInCartAmount());
             return "searching/anything";
         } else {
-            prodNotFoundMsg = "Products not found.";
+            var prodNotFoundMsg = "Products not found.";
             model.addAttribute("prodNotFoundMsg", prodNotFoundMsg);
             model.addAttribute("cartProductAmount", cartService.getProductsInCartAmount());
-            return "error";
+            return "products_not_found";
         }
     }
 }

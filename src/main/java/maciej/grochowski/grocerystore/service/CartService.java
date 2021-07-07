@@ -1,7 +1,6 @@
 package maciej.grochowski.grocerystore.service;
 
 import lombok.AllArgsConstructor;
-import maciej.grochowski.grocerystore.error.NotEnoughMoneyException;
 import maciej.grochowski.grocerystore.model.Product;
 import maciej.grochowski.grocerystore.model.User;
 import maciej.grochowski.grocerystore.repository.ProductRepository;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -22,7 +20,7 @@ public class CartService {
     private final UserRepository userRepository;
     private final ArrayList<Product> cartProducts = new ArrayList<>();
 
-    public List<Product> getAllCartProducts() {
+    public ArrayList<Product> getAllCartProducts() {
         return cartProducts;
     }
 
@@ -37,14 +35,12 @@ public class CartService {
         }
     }
 
-    public void buyCartProducts(MyUserDetails userDetails) throws NotEnoughMoneyException {
+    public void buyCartProducts(MyUserDetails userDetails) {
         User user = userService.getPrincipal();
         BigDecimal userMoney = user.getMoney();
         BigDecimal cartPrice = getCartProductsPrice();
 
-        if (userMoney.compareTo(cartPrice) < 0) {
-            throw new NotEnoughMoneyException();
-        } else {
+        if (userMoney.compareTo(cartPrice) >= 0) {
             user.setMoney(userMoney.subtract(cartPrice));
             userDetails.setMoney(user.getMoney());
             userRepository.save(user);
@@ -61,7 +57,7 @@ public class CartService {
     }
 
     public BigDecimal getCartProductsPrice() {
-        List<Product> allCartProducts = getAllCartProducts();
+        ArrayList<Product> allCartProducts = getAllCartProducts();
         BigDecimal totalPrice = BigDecimal.ZERO;
 
         for (Product particularProduct : allCartProducts) {

@@ -18,6 +18,8 @@ public class ViewController {
 
     @GetMapping("/")
     public String index(Model model) {
+//        Set<Product> allProducts = productService.getAllProducts();
+//        allProducts.stream().sorted(Comparator.comparing(Product::getName)).collect(Collectors.toList());
         model.addAttribute("productList", productService.getAllProducts());
         model.addAttribute("cartProductAmount", cartService.getProductsInCartAmount());
         return "index";
@@ -28,16 +30,15 @@ public class ViewController {
         return "login";
     }
 
-    @GetMapping("/admin")
-    public String admin(Model model) {
-        model.addAttribute("productList", productService.getAllProducts());
-        return "admin_page";
+    @GetMapping("/hello")
+    public String userPage() {
+        return "hello_page";
     }
 
-    @GetMapping("/default")
-    public String defaultSite(HttpServletRequest request) {
-        if (request.isUserInRole("ROLE_ADMIN")) {
-            return "redirect:/admin";
-        } else return "redirect:/";
-    }
+//    @GetMapping("/default")
+//    public String defaultSite(HttpServletRequest request) {
+//        if (request.isUserInRole("ROLE_ADMIN")) {
+//            return "redirect:/admin";
+//        } else return "redirect:/";
+//    }
 }

@@ -2,20 +2,24 @@
 
     <div class="right">
         <h5>
+            <br><br>
+
             <div sec:authorize="!isAnonymous()">
-                <br>
                 <p sec:authentication="principal.username"></p>
+            </div>
+
+            <div class="form-group" th:if="${#authorization.expression('hasRole(''USER'')')}">
                 <span>Current balance: </span>
                 <span sec:authentication="principal.money"></span><span> PLN</span>
-                <br>
             </div>
+
+            <div class="form-group" th:if="${#authorization.expression('!hasRole(''ADMIN'')')}">
+                    <a href="/cart">Check my cart <span th:text="${cartProductAmount}"></span></a>
+            </div>
+
             <div sec:authorize="isAnonymous()">
                 <br><br>
             </div>
-                <a href="/cart">Check my cart <span th:text="${cartProductAmount}"></span></a>
         </h5>
-    </div>
-    <div sec:authorize="isAnonymous()">
-        <br><br><br>
     </div>
 </div>

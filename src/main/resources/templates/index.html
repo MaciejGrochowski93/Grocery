@@ -16,14 +16,17 @@
 
             <tbody>
                 <tr th:each="products : ${productList}">
+                    <div class="form-group" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+                        <td th:text="${products.id}">id</td>
+                    </div>
                     <td th:text="${products.name}">Name</td>
                     <td th:text="${products.brand}">Brand</td>
                     <td th:text="${products.category}">Category</td>
                     <td th:text="${products.countryProd}">Country</td>
                     <td th:text="${products.dateExpiration}">Expiration</td>
                     <td th:text="${products.price}">Price</td>
-                    <td>
 
+                    <td>
                         <div class="form-group" th:if="${#authorization.expression('!hasRole(''ADMIN'')')}">
                             <a th:href="@{'/cart/addCartProduct/' + ${products.id}}" class="btn btn-primary">Purchase</a>
                         </div>
@@ -32,8 +35,8 @@
                             <a th:href="@{'/product/update/' + ${products.id}}" class="btn btn-primary">Update</a>
                             <a th:href="@{'/product/delete/' + ${products.id}}" class="btn btn-danger">Delete</a>
                         </div>
-
                     </td>
+
                 </tr>
             </tbody>
 

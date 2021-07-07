@@ -1,13 +1,13 @@
 package maciej.grochowski.grocerystore.service;
 
 import lombok.AllArgsConstructor;
+//import maciej.grochowski.grocerystore.error.IncorrectProductData;
+import maciej.grochowski.grocerystore.error.IncorrectProductData;
 import maciej.grochowski.grocerystore.model.Product;
 import maciej.grochowski.grocerystore.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -17,7 +17,9 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     public Set<Product> getAllProducts() {
-        return new HashSet<>(productRepository.findAll());
+        List<Product> productList = productRepository.findAll();
+        productList.sort(Comparator.comparing(Product::getId));
+        return new HashSet<>(productList);
     }
 
     public Optional<Product> findProductById(Integer id) {
@@ -45,8 +47,7 @@ public class ProductService {
     }
 
     public Set<Product> getProductsByCategory(String category) {
-        return productRepository
-                .findAll()
+        return getAllProducts()
                 .stream()
                 .filter(product -> product.getCategory().equalsIgnoreCase(category))
                 .collect(Collectors.toSet());
@@ -61,8 +62,7 @@ public class ProductService {
     }
 
     public Set<Product> getProductsByBrand(String brand) {
-        return productRepository
-                .findAll()
+        return getAllProducts()
                 .stream()
                 .filter(product -> product.getBrand() != null && product.getBrand().equals(brand))
                 .collect(Collectors.toSet());
@@ -76,8 +76,7 @@ public class ProductService {
     }
 
     public Set<Product> getProductsByCountry(String country) {
-        return productRepository
-                .findAll()
+        return getAllProducts()
                 .stream()
                 .filter(product -> product.getCountryProd().equals(country))
                 .collect(Collectors.toSet());
@@ -88,7 +87,11 @@ public class ProductService {
     }
 
     public void updateProduct(Integer id, Product product) {
-        productRepository.save(product);
+        if (
+                product.getName() != null && product.getCategory() != null &&
+                product.getPrice() != null) {
+            productRepository.save(product);
+        } else throw new IncorrectProductData();
     }
 
     public void deleteProduct(Integer id) {

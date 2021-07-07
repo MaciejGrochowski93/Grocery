@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -17,28 +18,32 @@ import java.util.Objects;
 @AllArgsConstructor
 @Table(name = "products")
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
     @Length(min = 1, max = 50, message = "Product's name must consist of 1 to 50 letters.")
-    @Column(name = "name", unique = true, nullable = false)
+    @Column(name = "name")
     private String name;
 
     @Column(name = "brand")
     private String brand;
 
-    @DecimalMin(value = "0.00", message = "Price has to be a non negative number")
-    @Column(name = "price", nullable = false)
+    @NotNull(message = "Price has to be a non negative number")
+    @DecimalMin(value = "0.01", inclusive = false)
+    @Column(name = "price")
     private BigDecimal price;
 
+    @NotNull(message = "You have to insert the price.")
     @DecimalMin(value = "0", message = "Amount has to be a non negative number")
-    @Column(name = "amount", nullable = false)
+    @Column(name = "amount")
     private BigDecimal amount = BigDecimal.valueOf(10);
 
+    @NotNull(message = "You have to provide an email")
     @Length(min = 1, max = 50, message = "Your email must consist of 6 to 30 letters.")
-    @Column(name = "category", nullable = false)
+    @Column(name = "category")
     private String category;
 
     @Column(name = "country_prod")

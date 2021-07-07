@@ -1,7 +1,6 @@
 package maciej.grochowski.grocerystore.controller;
 
 import lombok.AllArgsConstructor;
-import maciej.grochowski.grocerystore.error.NotEnoughMoneyException;
 import maciej.grochowski.grocerystore.model.Product;
 import maciej.grochowski.grocerystore.model.User;
 import maciej.grochowski.grocerystore.security.MyUserDetails;
@@ -9,7 +8,6 @@ import maciej.grochowski.grocerystore.service.CartService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -53,11 +51,18 @@ public class CartController {
 
     @GetMapping("/buyCartProduct")
     public String buyCartProduct(@ModelAttribute("user") User user, @AuthenticationPrincipal MyUserDetails userDetails,
-                                 Model model, BindingResult result) throws NotEnoughMoneyException {
-        String afterBuyMessage = "";
-        if (!result.hasErrors() && cartService.getCartProductsPrice().compareTo(BigDecimal.ZERO) != 0) {
-            cartService.buyCartProducts(userDetails);
-            afterBuyMessage = "Purchase complete.";
+                                 Model model) {
+        BigDecimal cartProductsPrice = cartService.getCartProductsPrice();
+        BigDecimal userDetailsMoney = userDetails.getMoney();
+        var afterBuyMessage = "Your cart is empty.";
+
+        if (cartProductsPrice != BigDecimal.ZERO) {
+            if (userDetailsMoney.compareTo(cartProductsPrice) >= 0) {
+                cartService.buyCartProducts(userDetails);
+                afterBuyMessage = "Purchase complete.";
+            } else if (userDetailsMoney.compareTo(cartProductsPrice) < 0) {
+                afterBuyMessage = "Not enough money to complete the purchase.";
+            }
         }
 
         model.addAttribute("afterBuyMessage", afterBuyMessage);

@@ -6,15 +6,16 @@
 
 <body>
 <div th:replace="fragments/nav :: navbar"></div>
-
 <div align="center">
-    <br><br><br><br>
+
     <div class="container">
-        <h1>Sorry, this page doesn't exist, or you have no authorities to browse it.</h1>
+        <br><br><br>
+        <h1 th:if="${prodNotFoundMsg}">Products not found.</h1>
         <br><br><br>
         <p><a href="/">Return to homepage</a></p>
     </div>
-</div>
 
+
+</div>
 </body>
 </html>

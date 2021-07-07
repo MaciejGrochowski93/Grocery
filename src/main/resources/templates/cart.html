@@ -1,40 +1,39 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+
 <head>
     <div th:replace="fragments/head :: headPart"></div>
 </head>
+
 <body>
-    <div th:replace="fragments/nav :: navbar"></div><div align="center">
+    <div th:replace="fragments/nav :: navbar"></div>
+    <div align="center">
 
-    <div class="right">
-        <h5>
-            <div sec:authorize="!isAnonymous()">
-                <br>
-                <p sec:authentication="principal.username"></p>
-                <span>Current balance: </span>
-                <span sec:authentication="principal.money"></span><span> PLN</span>
-                <br>
-            </div>
+        <div class="right">
+            <h5>
+                <br><br>
+
+                <div sec:authorize="!isAnonymous()">
+                    <p sec:authentication="principal.username"></p>
+                </div>
+
+                <div class="form-group" th:if="${#authorization.expression('hasRole(''USER'')')}">
+                    <span>Current balance: </span>
+                    <span sec:authentication="principal.money"></span><span> PLN</span>
+                </div>
+
                 <p><a href="/">Return to homepage</a></p>
-        </h5>
-    </div>
-
-        <div sec:authorize="isAnonymous()">
-            <br><br><br>
+            </h5>
         </div>
+
+    <div sec:authorize="isAnonymous()">
+        <br><br><br>
+    </div>
 
     <table border="2" class="table table-bordered" style="width: 60%">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Brand</th>
-                <th>Category</th>
-                <th>Country</th>
-                <th>Expiration</th>
-                <th>Amount</th>
-                <th>Price</th>
-                <th>Action</th>
-            </tr>
+                <div th:replace="fragments/thead :: tabhead"></div>
         </thead>
         <tbody>
             <tr th:each="products : ${cartProductSet}">
@@ -59,8 +58,9 @@
         </form>
         </tbody>
     </table>
-        <p th:text="${noMoneyErrorMsg}"></p>
+        <p th:text="${errorMessage}"></p>
+<!--        <p th:text="${noMoneyErrorMsg}"></p>-->
         <p th:text="${afterBuyMessage}"></p>
-</div>
+    </div>
 </body>
 </html>
