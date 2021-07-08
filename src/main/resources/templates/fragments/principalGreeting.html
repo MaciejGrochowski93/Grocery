@@ -14,7 +14,7 @@
             </div>
 
             <div class="form-group" th:if="${#authorization.expression('!hasRole(''ADMIN'')')}">
-                    <a href="/cart">Check my cart <span th:text="${cartProductAmount}"></span></a>
+                <a href="/cart">Check my cart <span th:text="${cartProductAmount}"></span></a>
             </div>
 
             <div sec:authorize="isAnonymous()">

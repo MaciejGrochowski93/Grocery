@@ -12,35 +12,38 @@
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="/">Home</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="/category">Category</a>
+                        <a class="nav-link active" a th:href="@{/}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/brand">Brand</a>
+                        <a class="nav-link" a th:href="@{/category}">Category</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/country">Country</a>
+                        <a class="nav-link" a th:href="@{/brand}">Brand</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" a th:href="@{/country}">Country</a>
                     </li>
                     <li>
                         <h3>Maciej's Grocery</h3>
                     </li>
+
                     <li>
                         <form th:action="@{search}" class="d-flex">
                             <input name="productsSetByAnything" class="form-control me-sm-2" type="text" placeholder="Search">
                             <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                         </form>
                     </li>
+
+
                     <div sec:authorize="isAnonymous()">
                         <li class="nav-item">
-                            <a class="nav-link" href="login">Join us</a>
+                            <a class="nav-link" a th:href="@{/login}">Join us</a>
                         </li>
                     </div>
+
                     <div sec:authorize="!isAnonymous()">
                         <li class="nav-item">
-                            <a class="nav-link" href="logout">Log out</a>
+                            <a class="nav-link" a th:href="@{/logout}">Log out</a>
                         </li>
                     </div>
                 </ul>
