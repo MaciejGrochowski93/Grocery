@@ -1,5 +1,6 @@
 package maciej.grochowski.grocerystore.controller;
 
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import maciej.grochowski.grocerystore.model.Product;
 import maciej.grochowski.grocerystore.model.User;
@@ -29,6 +30,7 @@ public class CartController {
         return Optional.ofNullable(request.getHeader("Referer")).map(requestUrl -> "redirect:" + requestUrl);
     }
 
+    @ApiOperation(value = "Shows the Products you added to your cart.")
     @GetMapping()
     public String cartListPage(Model model) {
         model.addAttribute("cartProductSet", cartService.getAllCartProducts());
@@ -36,6 +38,7 @@ public class CartController {
         return "cart";
     }
 
+    @ApiOperation(value = "Shows the total price of products in the cart.")
     @GetMapping("/cartProductsPrice")
     public String getCartProductsPrice(ModelAndView model) {
         BigDecimal totalPrice = cartService.getCartProductsPrice();
@@ -43,12 +46,14 @@ public class CartController {
         return "redirect:/cart";
     }
 
+    @ApiOperation(value = "Adds the Product to your cart.")
     @GetMapping("/addCartProduct/{id}")
     public String addCartProductForm(@PathVariable Integer id, Product product, HttpServletRequest request) {
         cartService.addCartProduct(product);
         return getPreviousPageByRequest(request).orElse("/");
     }
 
+    @ApiOperation(value = "Allows - USER - to buy the product, and pay for it.")
     @GetMapping("/buyCartProduct")
     public String buyCartProduct(@ModelAttribute("user") User user, @AuthenticationPrincipal MyUserDetails userDetails,
                                  Model model) {
@@ -69,18 +74,21 @@ public class CartController {
         return "cart";
     }
 
+    @ApiOperation(value = "This method increases the quantity of the particular Product you can possibly buy.")
     @GetMapping("/oneMoreProduct/{id}")
     public String oneMoreSameProduct(@PathVariable Integer id, Product product) {
         cartService.oneMoreSameProduct(product);
         return "redirect:/cart";
     }
 
+    @ApiOperation(value = "This method decreases the quantity of the particular Product you can possibly buy.")
     @GetMapping("/oneLessProduct/{id}")
     public String oneLessSameProduct(@PathVariable Integer id, Product product) {
         cartService.oneLessSameProduct(product);
         return "redirect:/cart";
     }
 
+    @ApiOperation(value = "This method removes the Product from your cart.")
     @GetMapping("/deleteCartProduct/{id}")
     public String deleteCartProduct(@PathVariable Integer id, Product product) {
         cartService.deleteCartProduct(product);

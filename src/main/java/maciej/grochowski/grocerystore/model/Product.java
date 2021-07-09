@@ -1,5 +1,6 @@
 package maciej.grochowski.grocerystore.model;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -36,10 +37,11 @@ public class Product {
     @Column(name = "price")
     private BigDecimal price;
 
+    @ApiModelProperty(value = "Infinite amount - shop can order as many Products as they want.")
     @NotNull(message = "You have to insert the price.")
     @DecimalMin(value = "0", message = "Amount has to be a non negative number")
     @Column(name = "amount")
-    private BigDecimal amount = BigDecimal.valueOf(10);
+    private BigDecimal amount = BigDecimal.valueOf(1);
 
     @NotNull(message = "You have to provide an email")
     @Length(min = 1, max = 50, message = "Your email must consist of 6 to 30 letters.")

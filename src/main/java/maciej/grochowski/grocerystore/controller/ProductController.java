@@ -1,5 +1,6 @@
 package maciej.grochowski.grocerystore.controller;
 
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import maciej.grochowski.grocerystore.model.Product;
 import maciej.grochowski.grocerystore.service.ProductService;
@@ -24,12 +25,15 @@ public class ProductController implements WebMvcConfigurer {
 
     private final ProductService productService;
 
+    @ApiOperation(value = "ADMIN can add a new Product.")
     @GetMapping("/addProduct")
     public String addProductForm(Model model) {
         model.addAttribute("productForm", new Product());
         return "new_product";
     }
 
+    @ApiOperation(value = "ADMIN can add a new Product.",
+            notes = "You have to provide at least the name, price & category.")
     @PostMapping("/addProduct")
     public String addNewProduct(@ModelAttribute("productForm") @Valid Product product,
                                 BindingResult result) {
@@ -40,6 +44,7 @@ public class ProductController implements WebMvcConfigurer {
         return "redirect:/";
     }
 
+    @ApiOperation(value = "ADMIN can update the existing Product.")
     @GetMapping("/update/{id}")
     public String updateProduct(@PathVariable Integer id, Model model) {
         productService.findProductById(id)
@@ -47,6 +52,8 @@ public class ProductController implements WebMvcConfigurer {
         return "update_product";
     }
 
+    @ApiOperation(value = "ADMIN can update the existing Product.",
+            notes = "You have to provide at least the name, price & category.")
     @PostMapping("/update/{id}")
     public String updateProduct(@PathVariable Integer id,
                                 @Valid @ModelAttribute("productForm2") Product product, BindingResult result) {
@@ -58,6 +65,7 @@ public class ProductController implements WebMvcConfigurer {
         }
     }
 
+    @ApiOperation(value = "ADMIN can delete the existing Product.")
     @GetMapping("/delete/{id}")
     public String deleteProduct(@PathVariable Integer id) {
         productService.deleteProduct(id);

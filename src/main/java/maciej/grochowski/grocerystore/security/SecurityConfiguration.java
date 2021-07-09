@@ -38,20 +38,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/confirm**",
-//                        "/cart/*/*", "/search*", "/category/*",
-//                        "/brand/*", "/country", "/country/*", "/default",
-                        "/*", "/*/*", "/*/*/*"
-//                        "/v2/*"
-                ).permitAll()
-                .antMatchers("/cart/buyCartProduct").hasRole("USER")
-                .antMatchers("/addProduct", "/product/*/*").hasRole("ADMIN")
+                .antMatchers("/product/**").hasRole("ADMIN")
+                .antMatchers("/cart/*").hasRole("USER")
+                .antMatchers("/*", "/*/*", "/*/*/*").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .permitAll()
                 .defaultSuccessUrl("/hello", true)
                 .and()
                 .logout()

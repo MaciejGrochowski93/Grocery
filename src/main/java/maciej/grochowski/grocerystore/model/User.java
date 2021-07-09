@@ -1,5 +1,6 @@
 package maciej.grochowski.grocerystore.model;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
@@ -20,6 +21,7 @@ public class User {
     @Column(name = "id")
     private Integer id;
 
+    @ApiModelProperty(value = "Email must be unique.")
     @Column(name = "email", unique = true)
     private String email;
 
@@ -38,6 +40,7 @@ public class User {
     @Column(name = "locked")
     private Boolean locked = false;
 
+    @ApiModelProperty("ROLE_USER or ROLE_ADMIN")
     @Column(name = "roles")
     private String roles = "ROLE_USER";
 

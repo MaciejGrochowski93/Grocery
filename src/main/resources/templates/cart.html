@@ -32,8 +32,13 @@
 
     <table border="2" class="table table-bordered" style="width: 60%">
         <thead>
-            <tr>
-                <div th:replace="fragments/thead :: tabhead"></div>
+            <th>Name</th>
+            <th>Brand</th>
+            <th>Category</th>
+            <th>Country</th>
+            <th>Expiration</th>
+            <th>Price</th>
+            <th>Action</th>
         </thead>
         <tbody>
             <tr th:each="products : ${cartProductSet}">
@@ -51,14 +56,13 @@
                 </td>
             </tr>
             <tr>
-                    <td></td><td></td><td></td><td></td><td></td><td></td>
+                    <td></td><td></td><td></td><td></td><td></td>
                     <td><span>Σ </span><a th:text="${cartProductPrice}"></a></td>
                     <td><a th:href="@{/cart/buyCartProduct}" class="btn btn-primary">Purchase</a> </td>
             </tr>
         </form>
         </tbody>
     </table>
-        <p th:text="${errorMessage}"></p>
         <p th:text="${afterBuyMessage}"></p>
     </div>
 </body>
