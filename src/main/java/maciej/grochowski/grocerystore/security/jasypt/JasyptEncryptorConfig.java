@@ -9,6 +9,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class JasyptEncryptorConfig {
 
+    public final String JASYPT_ID = "MV4OZrDtyvU8+3bpa/gxuNWRpezo73BMAoWSmlPzWxrJhdTAbB1tW1mOhYNNg0/lEYwLV5uxrt2hO7tBLza8BQ==";
+    public final String JASYPT_PASSWORD = "TvuxdiiUKzVE7XpzSTsqAjpm/PCOQuXi";
+
     @Bean(name = "jasyptBean")
     public StringEncryptor passwordEncryptor() {
         var encryptor = new PooledPBEStringEncryptor();
