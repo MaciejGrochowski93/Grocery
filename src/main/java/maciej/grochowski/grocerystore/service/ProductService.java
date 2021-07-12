@@ -17,12 +17,6 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
-//    public Set<Product> getAllProducts() {
-//        List<Product> productList = productRepository.findAll();
-//        productList.sort(Comparator.comparing(Product::getId));
-//        return new LinkedHashSet<>(productList);
-//    }
-
     public List<Product> getAllProducts() {
         List<Product> productList = productRepository.findAll();
         return new LinkedList(productList);
