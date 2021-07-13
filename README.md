@@ -4,7 +4,7 @@ This is a SpringBoot project of a grocery store, which allows logged Users to do
 shop transactions with Products.
 
 ## Getting Started
-In order to execute the application, you need to turn on some SQL connection like XAMPP.
+In order to execute the application, you need to turn on some SQL connection or XAMPP.
 
 ## Log in/Register
 After starting, you can use credentials: "user/user", "admin/admin",
